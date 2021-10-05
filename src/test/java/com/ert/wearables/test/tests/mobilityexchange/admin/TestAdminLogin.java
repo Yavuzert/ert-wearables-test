@@ -84,7 +84,7 @@ public class TestAdminLogin {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3833"> SB-3833 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 2, description = "Test testLoginPage", enabled = true)
+	@Test(priority = 2, description = "Test testLoginPage", enabled = true, groups = "smoke")
 	@Story("")
 	@Description("Test testLoginPage")
 	@Severity(SeverityLevel.CRITICAL)
