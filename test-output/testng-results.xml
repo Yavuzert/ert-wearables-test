@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="30" total="31" passed="1">
+<testng-results skipped="0" failed="0" ignored="6" total="7" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="13255" started-at="2021-10-05T03:19:49 EDT" finished-at="2021-10-05T03:20:03 EDT">
+  <suite name="Default suite" duration-ms="4389" started-at="2021-10-08T12:48:00 EDT" finished-at="2021-10-08T12:48:05 EDT">
     <groups>
+      <group name="smoke">
+        <method signature="TestAdminLogin.testGetTitle()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@58a55449]" name="testGetTitle" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+      </group> <!-- smoke -->
     </groups>
-    <test name="Default test" duration-ms="13255" started-at="2021-10-05T03:19:49 EDT" finished-at="2021-10-05T03:20:03 EDT">
-      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@5851bd4f]" name="setUp" is-config="true" duration-ms="7246" started-at="2021-10-05T03:19:49 EDT" finished-at="2021-10-05T03:19:57 EDT">
+    <test name="Default test" duration-ms="4389" started-at="2021-10-08T12:48:00 EDT" finished-at="2021-10-08T12:48:05 EDT">
+      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@58a55449]" name="setUp" is-config="true" duration-ms="3527" started-at="2021-10-08T12:48:00 EDT" finished-at="2021-10-08T12:48:04 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testSiteTableSiteNameLink()[pri:13, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@5851bd4f]" name="testSiteTableSiteNameLink" duration-ms="5261" started-at="2021-10-05T03:19:57 EDT" description=" Test testSiteTableSiteNameLink" finished-at="2021-10-05T03:20:02 EDT">
+        <test-method status="PASS" signature="testGetTitle()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@58a55449]" name="testGetTitle" duration-ms="57" started-at="2021-10-08T12:48:04 EDT" description="Test testGetTitle" finished-at="2021-10-08T12:48:04 EDT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testSiteTableSiteNameLink -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@5851bd4f]" name="tearDown" is-config="true" duration-ms="597" started-at="2021-10-05T03:20:02 EDT" finished-at="2021-10-05T03:20:03 EDT">
+        </test-method> <!-- testGetTitle -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@58a55449]" name="tearDown" is-config="true" duration-ms="602" started-at="2021-10-08T12:48:04 EDT" finished-at="2021-10-08T12:48:05 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestSite -->
+      </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

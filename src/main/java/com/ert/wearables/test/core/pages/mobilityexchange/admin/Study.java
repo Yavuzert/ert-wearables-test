@@ -1,10 +1,15 @@
 package com.ert.wearables.test.core.pages.mobilityexchange.admin;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.aventstack.extentreports.model.Log;
 import com.ert.wearables.test.core.base.BaseSetup;
 import com.ert.wearables.test.core.utilities.AdminUtils;
 import com.ert.wearables.test.core.utilities.ElementUtils;
@@ -20,27 +25,29 @@ public class Study extends BaseSetup {
 	AdminUtils adminUtils;
 	ProjectsUtils projectsUtils;
 
+	Logger log = Logger.getLogger(Study.class);
+
 	// Study property locators
 	private By nameUser = By.xpath("//label[contains(text(), \"Name\")]/following-sibling::input");
 	private By description = By.xpath("//label[contains(text(), \"Description\")]/following-sibling::input");
 	private By Guid = By.xpath("//label[contains(text(), \"GUID\")]/following-sibling::input");
 	private By phase = By.xpath("//div[@class='es-select']/select");
 	private By date = By.xpath("//div[@class='es-date-input']/input");
-	//private By tableDate = By.xpath("//table[@class='datePickerDays']");
+	// private By tableDate = By.xpath("//table[@class='datePickerDays']");
 	private By tableTg = By.xpath("//div[@__uiobjectid='30']");
 	private By usesSites = By.xpath("//input[@type='checkbox']/following-sibling::label[1]");
 	private By clickAllowDevice = By.xpath("/html/body/div/main/div/div/form/section/div[8]/div/label");
 	private By submitButton = By.xpath("//button[normalize-space()='Submit']");
 
 	// Study property locators
-	//private By tableIdColumn = By.xpath("//span[normalize-space()='Id']"); 
-	//private By tableIDFirstColumn = By.xpath("//tbody/tr[1]/td[1]/div[1]/a[1]");
+	// private By tableIdColumn = By.xpath("//span[normalize-space()='Id']");
+	// private By tableIDFirstColumn = By.xpath("//tbody/tr[1]/td[1]/div[1]/a[1]");
 
 	// Study Table's Link Locators
 	private By tableIdLink = By.xpath("//table//tbody//tr[1]//td[1]//a");
 	private By tableNameLink = By.xpath("//table//tbody//tr[1]//td[2]//a");
 	private By tableSubjectLink = By.xpath("//table//tbody//tr[1]//td[3]//a");
-	//private By tableSessionsLink = By.xpath("//table//tbody//tr[1]//td[4]//a");
+	// private By tableSessionsLink = By.xpath("//table//tbody//tr[1]//td[4]//a");
 	private By tableSessionsLink = By.xpath("/html/body/div/main/div/div/div[3]/div/table/tbody/tr[1]/td[4]/div/a");
 	private By tableTestDefinitionsLink = By.xpath("//table//tbody//tr[1]//td[5]//a");
 	private By tableTrialsLink = By.xpath("//tbody/tr[1]/td[5]/div[1]/a[1]");
@@ -53,7 +60,8 @@ public class Study extends BaseSetup {
 
 	// Study Form's Locators
 	private By studiesFormDeleteButton = By.xpath("//button[normalize-space()='Delete']");
-	//private By studiesFormObjectEditButton = By.xpath("//button[normalize-space()='Edit']");
+	// private By studiesFormObjectEditButton =
+	// By.xpath("//button[normalize-space()='Edit']");
 	private By studiesFormPageTitle = By.xpath("//h2[@class='es-page-title']");
 	private By studiesFormObjectId = By.xpath("/html/body/div/main/div/div/form/section/div[1]/div/a");
 	private By studiesFormObjectName = By.cssSelector("section > div:nth-child(2) > div");
@@ -102,7 +110,10 @@ public class Study extends BaseSetup {
 	private By tableRowsDeleted = By.xpath("//table//tbody//tr//td[20]");
 	private By tableHeaderLastModified = By.xpath("//table//thead//tr[1]//th[21]");
 	private By tableRowsLastModified = By.xpath("//table//tbody//tr//td[21]");
-	
+
+	// Side Bar
+	private By sideBarItems = By.xpath("//li[@class='es-nav-item']");
+
 	public By getTableHeaderName() {
 		return tableHeaderName;
 	}
@@ -263,7 +274,6 @@ public class Study extends BaseSetup {
 		return tableRowsLastModified;
 	}
 
-	
 	/**
 	 * Constructor
 	 * 
@@ -276,13 +286,13 @@ public class Study extends BaseSetup {
 		adminUtils = new AdminUtils(driver);
 		projectsUtils = new ProjectsUtils(driver);
 	}
-	
+
 	/**
 	 * This method create new object
 	 * 
 	 * @author yavuz.ozturk
 	 */
-	public void createObject(String name, String desc, String guid, String phaseParam) throws InterruptedException {
+	public void createObject(String name, String desc, String guid, String phaseParam) {
 		By phaseOption = By.xpath("//option[contains(text(), '" + phaseParam + "')]");
 		elementUtils.waitForElementPresent(nameUser);
 		elementUtils.doSendKeys(nameUser, name);
@@ -323,7 +333,7 @@ public class Study extends BaseSetup {
 		int lastRowIndex = tableRowList.size();
 
 		WebElement lastCreatedUser = elementUtils.getElement(By.xpath(beforeXpath + lastRowIndex + afterXpath));
-		
+
 		return lastCreatedUser.getText();
 	}
 
@@ -331,7 +341,7 @@ public class Study extends BaseSetup {
 	 * This method is used to delete last created Study Table's Object Via ID Link
 	 * 
 	 * @author yavuz.ozturk
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public void deleteLastCreatedObjectViaIdLink() throws InterruptedException {
 		elementUtils.doClick(By.linkText(getLastCreatedObjectIdFromStudyTable()));
@@ -344,7 +354,7 @@ public class Study extends BaseSetup {
 	 * 
 	 * @return
 	 * @author yavuz.ozturk
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public String getLastCreatedObjectNameFromStudyTable() throws InterruptedException {
 		String beforeXpath = "//table//tbody//tr[";
@@ -363,7 +373,7 @@ public class Study extends BaseSetup {
 	 * This method is used to delete last created Study Table's Object Via Name Link
 	 * 
 	 * @author yavuz.ozturk
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public void deleteLastCreatedObjectViaNameLink() throws InterruptedException {
 		elementUtils.doClick(By.linkText(getLastCreatedObjectNameFromStudyTable()));
@@ -395,7 +405,7 @@ public class Study extends BaseSetup {
 		String studyTableObjectName = elementUtils.doGetText(tableNameLink);
 		return studyTableObjectName;
 	}
-	
+
 	/**
 	 * This method is used to get study form's object name
 	 * 
@@ -406,7 +416,7 @@ public class Study extends BaseSetup {
 		elementUtils.waitForElementPresent(studiesFormObjectId);
 		return elementUtils.doGetText(studiesFormObjectId);
 	}
-	
+
 	/**
 	 * This method is used to get study form's object name
 	 * 
@@ -502,7 +512,8 @@ public class Study extends BaseSetup {
 	}
 
 	/**
-	 * This method is used to get study table's device allocation configurationscount
+	 * This method is used to get study table's device allocation
+	 * configurationscount
 	 * 
 	 * @return
 	 * @author yavuz.ozturk
@@ -575,7 +586,7 @@ public class Study extends BaseSetup {
 		elementUtils.doClick(tableDeviceAllocationGroupsLink);
 		return deviceAllocationGroupsCount;
 	}
-	
+
 	/**
 	 * This method is used to click study table's name link
 	 * 
@@ -649,5 +660,23 @@ public class Study extends BaseSetup {
 		elementUtils.doClick(studiesFormSubjectsLink);
 		return subjectCount;
 	}
-	
+
+	/**
+	 * This method is used to get Side Bar Elements' text
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
+	public ArrayList<String> getSideBarItems() {
+		elementUtils.waitForElementPresent(sideBarItems);
+		List<WebElement> sideBarElements = driver.findElements(sideBarItems);
+		ArrayList<String> sideBarElementsText = new ArrayList<>();
+
+		for (WebElement element : sideBarElements) {
+			sideBarElementsText.add(element.getText());
+		}
+		log.info("Side Bar Elements Text: " + sideBarElementsText);
+		return sideBarElementsText;
+	}
+
 }

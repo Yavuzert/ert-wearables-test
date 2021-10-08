@@ -73,7 +73,7 @@ public class TestStudy {
 
 	Logger log = Logger.getLogger(TestStudy.class);
 
-	@BeforeMethod
+	@BeforeMethod(groups = "start")
 	public void setUp() {
 		log.info("BeforeMethod is starting...");
 		log.info("TestStudy class is starting for tests");
@@ -110,7 +110,7 @@ public class TestStudy {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3809"> SB-3809 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 1, description = "Test testFullCompactViewsOnStudy", enabled = true)
+	@Test(priority = 1, description = "Test testFullCompactViewsOnStudy", enabled = true, groups = {"smoke"})
 	@Story("Test Study Place in UI MX Admin Tests")
 	@Description("Test testFullCompactViewsOnstudy")
 	@Severity(SeverityLevel.CRITICAL)
@@ -134,10 +134,10 @@ public class TestStudy {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 2, description = "Test testCreateNewTestObjectNotSet", invocationCount = 1, enabled = true)
+	@Test(priority = 2, description = "Test testCreateNewTestObjectNotSet", invocationCount = 1, enabled = true, groups = {"smoke", "setup"})
 	@Story("Test Study Place in UI MX Admin Tests")
 	@Description("Test testCreateNewTestObjectNotSet")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testCreateNewTestObjectNotSet() throws InterruptedException {
 		log.info("testCreateNewTestObjectNotSet test is starting... ");
 		adminUtils.clickCreate();
@@ -160,10 +160,10 @@ public class TestStudy {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 3, description = "Test testCreateNewTestObjectWithConfiguring", enabled = true)
+	@Test(priority = 3, description = "Test testCreateNewTestObjectWithConfiguring", enabled = true, groups = {"smoke"})
 	@Story("Test Study Place in UI MX Admin Tests")
 	@Description("Test testCreateNewTestObjectWithConfiguring")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testCreateNewTestObjectWithConfiguring() throws InterruptedException {
 		log.info("testCreateNewTestObjectWithConfiguring test is starting... ");
 		adminUtils.clickCreate();
@@ -187,10 +187,10 @@ public class TestStudy {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 4, description = "Test testCreateNewTestObjectWithConfigured", enabled = true)
+	@Test(priority = 4, description = "Test testCreateNewTestObjectWithConfigured", enabled = true, groups = {"smoke"})
 	@Story("Test Study Place in UI MX Admin Tests")
 	@Description("Test verifyCreateNewTestObjectWithConfigured")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testCreateNewTestObjectWithConfigured() throws InterruptedException {
 		log.info("testCreateNewTestObjectWithConfigured test is starting... ");
 		adminUtils.clickCreate();
@@ -266,10 +266,10 @@ public class TestStudy {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 9, description = "Test validateStudyWebTableData", enabled = true)
+	@Test(priority = 9, description = "Test validateStudyWebTableData", enabled = true, groups = {"smoke"})
 	@Story("Test Study Place in UI MX Admin Tests")
 	@Description("Test validateStudyWebTableData")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testStudyWebTableData() throws InterruptedException {
 		log.info("testStudyWebTableData test is starting... ");
 		adminUtils.clickCreate();
@@ -1645,7 +1645,28 @@ public class TestStudy {
 		log.info("testStudyTableLastModifiedSort test is ending... ");
 	}
 	
-	@AfterMethod
+	/**
+	 * Test side bar elements' text and number
+	 * 
+	 * @see 
+	 * @author yavuz.ozturk
+	 */
+	@Test(priority = 63, description = "Test testSideBarItems", enabled = true)
+	@Story("")
+	@Description("Test testSideBarItems")
+	@Severity(SeverityLevel.CRITICAL)
+	public void testSideBarItems() {
+		log.info("testSideBarItems test is starting... ");
+		adminUtils.clickSideBarButton();
+		List<String> sideBarItemsStrings = study.getSideBarItems();
+		int size = sideBarItemsStrings.size();
+		
+		Assert.assertEquals(sideBarItemsStrings, AppConstants.SIDE_BAR_ITEMS);
+		Assert.assertEquals(size, 10);
+		log.info("testSideBarItems test is ending... ");
+	}
+	
+	@AfterMethod(groups = "finish")
 	public void tearDown() {
 		log.info("AfterMethod is starting... ");
 		driver.quit();

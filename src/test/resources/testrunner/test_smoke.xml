@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test thread-count="5" name="Test">
-    <classes>
-      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestAppLogin"/>
-      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
-    </classes>
-  </test> <!-- Test -->
+
+	<listeners>
+		<listener class-name="com.ert.wearables.test.core.listeners.ExtentReportListener" />
+		<listener class-name="com.ert.wearables.test.core.listeners.ScreenshotListener" />
+		<listener class-name="com.ert.wearables.test.core.listeners.PdfListener" />
+		<listener class-name="com.ert.wearables.test.core.listeners.TestAllureListener" />
+	</listeners>
+	
+	<test name="Test">
+		<groups>
+			<run>
+				<include name="start"></include>
+				<include name="smoke"></include>
+				<include name="finish"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin" />
+			<class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy" />
+			<class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite" />
+			<class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestSubject"/>
+		</classes>
+	</test> <!-- Test -->
+	
 </suite> <!-- Suite -->

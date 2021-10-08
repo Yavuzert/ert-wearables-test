@@ -2,52 +2,64 @@
 <testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="76438" started-at="2021-09-24T15:44:52Z" finished-at="2021-09-24T15:46:09Z">
+  <suite name="Surefire suite" duration-ms="28195" started-at="2021-10-07T17:49:57Z" finished-at="2021-10-07T17:50:25Z">
     <groups>
       <group name="smoke">
-        <method signature="TestStudy.testStudyTableObjectSessionLink()[pri:33, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@9cd25ff]" name="testStudyTableObjectSessionLink" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
-        <method signature="TestStudy.testStudyTableObjectTrialLink()[pri:34, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@9cd25ff]" name="testStudyTableObjectTrialLink" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
+        <method signature="TestAdminLogin.testGetTitle()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testGetTitle" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestAdminLogin.testLoginEmptyUserEmail(java.lang.String)[pri:5, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testLoginEmptyUserEmail" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestAdminLogin.testLoginEmptyUserPassword(java.lang.String, java.lang.String)[pri:6, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testLoginEmptyUserPassword" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestAdminLogin.testLoginInvalidCreds(java.lang.String, java.lang.String)[pri:4, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testLoginInvalidCreds" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestAdminLogin.testLoginPage()[pri:2, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testLoginPage" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestAdminLogin.testLogout()[pri:7, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testLogout" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin"/>
+        <method signature="TestSite.testCreateNewSite()[pri:2, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="testCreateNewSite" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite"/>
+        <method signature="TestSite.testFullCompactViewsOnSite()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="testFullCompactViewsOnSite" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite"/>
+        <method signature="TestSite.testSiteWebTableData()[pri:3, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="testSiteWebTableData" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite"/>
+        <method signature="TestStudy.testCreateNewTestObjectNotSet()[pri:2, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testCreateNewTestObjectNotSet" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
+        <method signature="TestStudy.testCreateNewTestObjectWithConfigured()[pri:4, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testCreateNewTestObjectWithConfigured" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
+        <method signature="TestStudy.testCreateNewTestObjectWithConfiguring()[pri:3, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testCreateNewTestObjectWithConfiguring" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
+        <method signature="TestStudy.testFullCompactViewsOnStudy()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testFullCompactViewsOnStudy" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
+        <method signature="TestStudy.testStudyWebTableData()[pri:9, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testStudyWebTableData" class="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy"/>
       </group> <!-- smoke -->
     </groups>
-    <test name="Surefire test" duration-ms="76438" started-at="2021-09-24T15:44:52Z" finished-at="2021-09-24T15:46:09Z">
+    <test name="Surefire test" duration-ms="28195" started-at="2021-10-07T17:49:57Z" finished-at="2021-10-07T17:50:25Z">
       <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@660e9100]" name="setUp" is-config="true" duration-ms="9900" started-at="2021-09-24T15:44:52Z" finished-at="2021-09-24T15:45:02Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="setUp" is-config="true" duration-ms="2756" started-at="2021-10-07T17:49:57Z" finished-at="2021-10-07T17:49:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGetTitle()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@660e9100]" name="testGetTitle" duration-ms="42" started-at="2021-09-24T15:45:02Z" description="Test testGetTitle" finished-at="2021-09-24T15:45:02Z">
+        <test-method status="PASS" signature="testGetTitle()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="testGetTitle" duration-ms="54" started-at="2021-10-07T17:49:59Z" description="Test testGetTitle" finished-at="2021-10-07T17:50:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetTitle -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@660e9100]" name="tearDown" is-config="true" duration-ms="565" started-at="2021-09-24T15:45:02Z" finished-at="2021-09-24T15:45:03Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin@2484f433]" name="tearDown" is-config="true" duration-ms="595" started-at="2021-10-07T17:50:00Z" finished-at="2021-10-07T17:50:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestAdminLogin -->
       <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestSite">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@69f63d95]" name="setUp" is-config="true" duration-ms="6127" started-at="2021-09-24T15:45:03Z" finished-at="2021-09-24T15:45:09Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="setUp" is-config="true" duration-ms="5956" started-at="2021-10-07T17:50:00Z" finished-at="2021-10-07T17:50:06Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testWebTableData()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@69f63d95]" name="testWebTableData" duration-ms="43736" started-at="2021-09-24T15:45:09Z" description="Test validateWebTableData" finished-at="2021-09-24T15:45:53Z">
+        <test-method status="PASS" signature="testFullCompactViewsOnSite()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="testFullCompactViewsOnSite" duration-ms="5930" started-at="2021-10-07T17:50:06Z" description="Test testFullCompactViewsOnSite" finished-at="2021-10-07T17:50:12Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testWebTableData -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@69f63d95]" name="tearDown" is-config="true" duration-ms="582" started-at="2021-09-24T15:45:53Z" finished-at="2021-09-24T15:45:53Z">
+        </test-method> <!-- testFullCompactViewsOnSite -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestSite@60b71e8f]" name="tearDown" is-config="true" duration-ms="588" started-at="2021-10-07T17:50:12Z" finished-at="2021-10-07T17:50:13Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestSite -->
       <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@9cd25ff]" name="setUp" is-config="true" duration-ms="6160" started-at="2021-09-24T15:45:53Z" finished-at="2021-09-24T15:45:59Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="setUp" is-config="true" duration-ms="5873" started-at="2021-10-07T17:50:13Z" finished-at="2021-10-07T17:50:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testFullCompactViews()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@9cd25ff]" name="testFullCompactViews" duration-ms="8611" started-at="2021-09-24T15:45:59Z" description="Test testFullCompactViews" finished-at="2021-09-24T15:46:08Z">
+        <test-method status="PASS" signature="testFullCompactViewsOnStudy()[pri:1, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="testFullCompactViewsOnStudy" duration-ms="5632" started-at="2021-10-07T17:50:19Z" description="Test testFullCompactViewsOnStudy" finished-at="2021-10-07T17:50:24Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testFullCompactViews -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@9cd25ff]" name="tearDown" is-config="true" duration-ms="558" started-at="2021-09-24T15:46:08Z" finished-at="2021-09-24T15:46:09Z">
+        </test-method> <!-- testFullCompactViewsOnStudy -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.ert.wearables.test.tests.mobilityexchange.admin.TestStudy@1255b1d1]" name="tearDown" is-config="true" duration-ms="598" started-at="2021-10-07T17:50:24Z" finished-at="2021-10-07T17:50:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

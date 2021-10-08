@@ -41,7 +41,7 @@ public class TestAdminLogin {
 
 	Logger log = Logger.getLogger(TestAdminLogin.class);
 	
-	@BeforeMethod()
+	@BeforeMethod(groups = "start")
 	public void setUp() {
 		log.info("BeforeMethod is starting...");
 		log.info("TestAppLogin class is starting for tests");
@@ -63,7 +63,7 @@ public class TestAdminLogin {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3833"> SB-3833 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 1, description = "Test testGetTitle", enabled = true, groups = "smoke")
+	@Test(priority = 1, description = "Test testGetTitle", enabled = true)
 	@Story("")
 	@Description("Test testGetTitle")
 	@Severity(SeverityLevel.NORMAL)
@@ -84,7 +84,7 @@ public class TestAdminLogin {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3833"> SB-3833 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 2, description = "Test testLoginPage", enabled = true, groups = "smoke")
+	@Test(priority = 2, description = "Test testLoginPage", enabled = true, groups = {"smoke"})
 	@Story("")
 	@Description("Test testLoginPage")
 	@Severity(SeverityLevel.CRITICAL)
@@ -99,7 +99,7 @@ public class TestAdminLogin {
 	}
 	
 	/**
-	 * Test account verification
+	 * Test user account verification
 	 * 
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3833"> SB-3833 </a>
 	 * @author yavuz.ozturk
@@ -147,7 +147,7 @@ public class TestAdminLogin {
 	 * @throws InterruptedException 
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 4, description = "Test invalid login credentials", dataProvider = "getLoginInvalidData", enabled = true)
+	@Test(priority = 4, description = "Test invalid login credentials", dataProvider = "getLoginInvalidData", enabled = true, groups = {"smoke"})
 	@Story("")
 	@Description("Test invalid login credentials")
 	@Severity(SeverityLevel.CRITICAL)
@@ -182,7 +182,7 @@ public class TestAdminLogin {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 5, description = "Test login with empty email", dataProvider = "emptyUserEmailData", enabled = true)
+	@Test(priority = 5, description = "Test login with empty email", dataProvider = "emptyUserEmailData", enabled = true, groups = {"smoke"})
 	@Story("")
 	@Description("Test login with empty email")
 	@Severity(SeverityLevel.CRITICAL)
@@ -218,7 +218,7 @@ public class TestAdminLogin {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 6, description = "Test login with empty password", dataProvider = "emptyUserPasswordData", enabled = true)
+	@Test(priority = 6, description = "Test login with empty password", dataProvider = "emptyUserPasswordData", enabled = true, groups = {"smoke"})
 	@Story("")
 	@Description("Test login with empty password")
 	@Severity(SeverityLevel.CRITICAL)
@@ -237,7 +237,7 @@ public class TestAdminLogin {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3833"> SB-3833 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 7, description = "Test testLogout", enabled = true)
+	@Test(priority = 7, description = "Test testLogout", enabled = true, groups = {"smoke"})
 	@Story("Verify ...")
 	@Description("Test testLogout")
 	@Severity(SeverityLevel.CRITICAL)
@@ -256,7 +256,7 @@ public class TestAdminLogin {
 		log.info("testLogout test is ending... ");
 	}
 	
-	@AfterMethod()
+	@AfterMethod(groups = "finish")
 	public void tearDown() {
 		log.info("tearDown test is starting... ");
 		driver.quit();

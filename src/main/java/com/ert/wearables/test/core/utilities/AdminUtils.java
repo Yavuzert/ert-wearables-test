@@ -42,6 +42,8 @@ public class AdminUtils {
 	private By tableIdLink = By.xpath("//table//tbody//tr[1]//td[1]//a");
 	private By tableHeaderId = By.xpath("//table//thead//tr[1]//th[1]");
 	private By tableRowsId = By.xpath("//table//tbody//tr//td[1]");
+	
+	private By sideBarButon = By.xpath("(//button)[2]");
 
 
 	public By getTableHeaderId() {
@@ -62,6 +64,13 @@ public class AdminUtils {
 		elementUtils = new ElementUtils(driver);
 		javaScriptUtil = new JavaScriptUtil(driver);
 	}
+	
+	
+	public void clickSideBarButton() {
+		elementUtils.waitForElementPresent(sideBarButon);
+		elementUtils.doClick(sideBarButon);
+	}
+	
 	
 	/**
 	 * This method is used to login Admin Pages
@@ -228,7 +237,21 @@ public class AdminUtils {
 		elementUtils.waitForElementPresent(By.xpath("/html/body/div/main/div/div/div[1]/ul[2]/li[1]/div/button[1]"));
 		elementUtils.doClick(By.xpath("/html/body/div/main/div/div/div[1]/ul[2]/li[1]/div/button[1]"));
 	}
-
+	
+//	/**
+//	 * This method returns table member ships count from pages table
+//	 * 
+//	 * @return
+//	 * @author yavuz.ozturk
+//	 */
+//	public int getTableMembershipsCount() {
+//		By tableRowsXpath = By.xpath("//table//tbody//tr");
+//		elementUtils.waitForElementPresent(tableRowsXpath);
+//		List<WebElement> tableRowList = driver.findElements(tableRowsXpath);
+//		int tableMembershipsCount = tableRowList.size();
+//		return tableMembershipsCount;
+//	}
+	
 	/**
 	 * This method gets the elements as a string and stores them in a list
 	 * 

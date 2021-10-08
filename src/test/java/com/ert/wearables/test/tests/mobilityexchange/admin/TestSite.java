@@ -17,13 +17,11 @@ import org.testng.annotations.Test;
 import com.ert.wearables.test.core.base.BaseSetup;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.AdminLogin;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.AuditLog;
-import com.ert.wearables.test.core.pages.mobilityexchange.admin.Study;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.Subject;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.Site;
 import com.ert.wearables.test.core.utilities.AdminUtils;
 import com.ert.wearables.test.core.utilities.AppConstants;
 import com.ert.wearables.test.core.utilities.Credentials;
-import com.ert.wearables.test.core.utilities.ElementUtils;
 import com.ert.wearables.test.core.utilities.ProjectsUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -46,18 +44,16 @@ public class TestSite {
 	BaseSetup baseSetup;
 	Properties prop;
 	AdminLogin adminLogin;
-	Study study;
-	Site site;
 	Credentials userCred;
-	ElementUtils elementUtils;
 	AdminUtils adminUtils;
+	Site site;
 	ProjectsUtils projectsUtils;
 	AuditLog auditLog;
 	Subject subject;
 	
 	Logger log = Logger.getLogger(TestSite.class);
 	
-	@BeforeMethod
+	@BeforeMethod(groups = "start")
 	public void setUp() {
 		log.info("BeforeMethod is starting...");
 		log.info("TestSite class is starting for tests");
@@ -66,7 +62,6 @@ public class TestSite {
 		String browserName = prop.getProperty("browser");
 		driver = baseSetup.init_driver(browserName);
 		driver.get(prop.getProperty("url"));
-		elementUtils = new ElementUtils(driver);
 		projectsUtils = new ProjectsUtils(driver);
 		adminUtils = new AdminUtils(driver);
 		log.info("url is launched: " + prop.getProperty("url"));
@@ -85,13 +80,13 @@ public class TestSite {
 	 * @see <a href="https://apdmwearables.atlassian.net/browse/SB-3810"> SB-3810 </a>
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 1, description = "Test testFullCompactViewsOnSite", enabled = true)
+	@Test(priority = 1, description = "Test testFullCompactViewsOnSite", enabled = true, groups = {"smoke"})
 	@Story("Test Sites Place in UI MX Admin Tests")
 	@Description("Test testFullCompactViewsOnSite")
 	@Severity(SeverityLevel.CRITICAL)
 	public void testFullCompactViewsOnSite() {
 		log.info("testFullCompactViewsOnSite test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String fullButtonText = adminUtils.getFullButtonText();
 		adminUtils.clickFull();
 		String compactText = adminUtils.getCompactText();
@@ -110,13 +105,13 @@ public class TestSite {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 2, description = "Test testCreateNewSite", invocationCount = 1, enabled = true)
+	@Test(priority = 2, description = "Test testCreateNewSite", invocationCount = 1, enabled = true, groups = {"smoke"})
 	@Story("Test Sites Place in UI MX Admin Tests")
 	@Description("Test testCreateNewSite")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testCreateNewSite() throws InterruptedException {
 		log.info("testCreateNewSite test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickCreate();
 
 		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
@@ -145,14 +140,14 @@ public class TestSite {
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	@Test(priority = 3, description = "Test validateSiteWebTableData", enabled = true)
+	@Test(priority = 3, description = "Test validateSiteWebTableData", enabled = true, groups = {"smoke"})
 	@Story("Test Sites Place in UI MX Admin Tests")
 	@Description("Test validateSiteWebTableData")
-	@Severity(SeverityLevel.NORMAL)
+	@Severity(SeverityLevel.CRITICAL)
 	public void testSiteWebTableData() throws InterruptedException {
 		log.info("testSiteWebTableData test is starting... ");
-		site.clickSitesIconButton();
-		site.clickCreate();
+		site.clickSitesSideBarButton();
+		adminUtils.clickCreate();
 		
 		Map<String, String> newUserMap = new LinkedHashMap<>();
 		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
@@ -270,7 +265,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteHistoryViaSiteTableIdLink()  {
 		log.info("testSiteHistoryViaSiteTableIdLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteId = site.getSiteTableSiteId();
 		adminUtils.clickTableIdLink();
 		String siteFormSiteId = site.getSiteFormSiteId();
@@ -302,7 +297,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteHistoryViaSiteTablesNameLink() {
 		log.info("testSiteHistoryViaSiteTablesNameLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteName = site.getSiteTableSiteName();
 		site.clickSiteTableNameLink();
 		String siteFormSiteName = site.getSiteFormSiteName();
@@ -335,7 +330,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteHistoryViaSiteTablesIdLinkWhenEditingSite() {
 		log.info("testSiteHistoryViaSiteTablesIdLinkWhenEditingSite test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteName = site.getSiteTableSiteName();
 		adminUtils.clickTableIdLink();
 		String siteFormSiteName = site.getSiteFormSiteName();
@@ -369,7 +364,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteHistoryViaSiteTablesNameLinkWhenEditingSite() {
 		log.info("testSiteHistoryViaSiteTablesNameLinkWhenEditingSite test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteName = site.getSiteTableSiteName();
 		site.clickSiteTableNameLink();;
 		String siteFormSiteName = site.getSiteFormSiteName();
@@ -404,7 +399,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteFormDeleteObjectWithIdLink() throws InterruptedException {
 		log.info("testSiteFormDeleteObjectWithIdLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.navigateToLastPage();
 		String lastCreatedSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site Before Delete " + lastCreatedSite);
@@ -432,7 +427,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteFormDeleteSiteWithNameLink() throws InterruptedException {
 		log.info("testSiteFormDeleteSiteWithNameLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.navigateToLastPage();
 		String lastCreatedSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site Before Delete " + lastCreatedSite);
@@ -460,7 +455,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void  testSiteEditButtonViaIdLink() throws InterruptedException {
 		log.info("testSiteEditButtonViaIdLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
 
@@ -495,7 +490,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void  testSiteEditButtonViaNameLink() throws InterruptedException {
 		log.info("testSiteEditButtonViaNameLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		site.clickSiteTableNameLink();
 		adminUtils.clickEditButton();
 
@@ -529,7 +524,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableSiteIdLink() {
 		log.info("testSiteTableSiteIdLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteId = adminUtils.getTableId();
 		String siteFormSiteId = adminUtils.getFormId();
 		log.info("Site Table Site Id: " + siteTableSiteId);
@@ -554,7 +549,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableSiteNameLink() {
 		log.info("testSiteTableSiteNameLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		String siteTableSiteName = site.getSiteTableSiteName();	
 		site.clickSiteTableNameLink();
 		String siteFormPageTitle = site.getSiteFormPageTitle();
@@ -581,18 +576,18 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableSubjectLink() {
 		log.info("testSiteTableSubjectLink test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		int siteTableSubjectCount = site.getSiteTableSubjectCount();
-		int siteSubjectCount = subject.getSubjectCount();
+		int subjectTableElementCount = subject.getSubjectCount();
 		log.info("Site Table Subject Count: " + siteTableSubjectCount);
-		log.info("Site Form Subject Count: " + siteSubjectCount);
+		log.info("Subject Table Element Count: " + subjectTableElementCount);
 		String curentURL = driver.getCurrentUrl();
 		log.info(curentURL);
 		String subjectsHeader = subject.getSubjectsHeader();
 		String subjectsPageTitle = subject.getSubjectsPageTitle();
 
 		assertTrue(curentURL.contains("subject"));
-		assertEquals(siteTableSubjectCount, siteSubjectCount);
+		assertEquals(siteTableSubjectCount, subjectTableElementCount);
 		assertEquals(subjectsHeader, AppConstants.SUBJECTS_PAGE_HEADER);
 		assertEquals(subjectsPageTitle, AppConstants.SUBJECTS_PAGE_TITLE);
 		log.info("testSiteTableSubjectLink test is ending... ");
@@ -610,7 +605,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableIdSort() {
 		log.info("testSiteTableIdSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(adminUtils.getTableRowsId(), adminUtils.getTableHeaderId());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(adminUtils.getTableRowsId(),adminUtils.getTableHeaderId());
 		
@@ -631,7 +626,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableNameSort() {
 		log.info("testSiteTableNameSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsName(),site.getTableHeaderName());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsName(),site.getTableHeaderName());
 		
@@ -652,7 +647,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableSubjectsSort() {
 		log.info("testSiteTableSubjectsSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsSubjects(),site.getTableHeaderSubjects());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsSubjects(),site.getTableHeaderSubjects());
 		
@@ -673,7 +668,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableContactUserSort() {
 		log.info("testSiteTableContactUserSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsContactUser(),site.getTableHeaderContactUser());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsContactUser(),site.getTableHeaderContactUser());
@@ -695,7 +690,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableAddressLineOneSort() {
 		log.info("testSiteTableAddressLineOneSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsAdressLineOne(),site.getTableHeaderAdressLineOne());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsAdressLineOne(),site.getTableHeaderAdressLineOne());
@@ -717,7 +712,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableAddressLineTwoSort() {
 		log.info("testSiteTableAddressLineTwoSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsAdressLineTwo(),site.getTableHeaderAdressLineTwo());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsAdressLineTwo(),site.getTableHeaderAdressLineTwo());
@@ -739,7 +734,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableCitySort() {
 		log.info("testSiteTableCitySort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCity(),site.getTableHeaderCity());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCity(),site.getTableHeaderCity());
@@ -761,7 +756,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableStateSort() {
 		log.info("testSiteTableStateSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsState(),site.getTableHeaderState());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsState(),site.getTableHeaderState());
@@ -783,7 +778,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableGuidSort() {
 		log.info("testSiteTableGuidSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsGuid(),site.getTableHeaderGuid());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsGuid(),site.getTableHeaderGuid());
@@ -805,7 +800,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableCountrySort() {
 		log.info("testSiteTableCountrySort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCountry(),site.getTableHeaderCountry());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCountry(),site.getTableHeaderCountry());
@@ -827,7 +822,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTablePhoneSort() {
 		log.info("testSiteTablePhoneSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsPhone(),site.getTableHeaderPhone());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsPhone(),site.getTableHeaderPhone());
@@ -849,7 +844,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableZipSort() {
 		log.info("testSiteTableZipSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsZip(),site.getTableHeaderZip());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsZip(),site.getTableHeaderZip());
@@ -871,7 +866,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableCreationDateSort() {
 		log.info("testSiteTableCreationDateSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCreationDate(),site.getTableHeaderCreationDate());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCreationDate(),site.getTableHeaderCreationDate());
@@ -893,7 +888,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableGeolocationSort() throws InterruptedException {
 		log.info("testSiteTableGeolocationSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsGeolocation(),site.getTableHeaderGeolocation());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsGeolocation(),site.getTableHeaderGeolocation());
@@ -915,7 +910,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableNotesSort() {
 		log.info("testSiteTableNotesSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsNotes(),site.getTableHeaderNotes());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsNotes(),site.getTableHeaderNotes());
@@ -937,7 +932,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableDeletedSort() {
 		log.info("testSiteTableDeletedSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsDeleted(),site.getTableHeaderDeleted());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsDeleted(),site.getTableHeaderDeleted());
@@ -959,7 +954,7 @@ public class TestSite {
 	@Severity(SeverityLevel.NORMAL)
 	public void testSiteTableLastModifiedSort() {
 		log.info("testSiteTableDeletedSort test is starting... ");
-		site.clickSitesIconButton();
+		site.clickSitesSideBarButton();
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsLastModified(),site.getTableHeaderLastModified());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsLastModified(),site.getTableHeaderLastModified());
@@ -969,12 +964,11 @@ public class TestSite {
 		log.info("testSiteTableLastModifiedSort test is ending... ");
 	}
 	
-	@AfterMethod
+	@AfterMethod(groups = "finish")
 	public void tearDown() {
 		log.info("AfterMethod is starting... ");
 		driver.quit();
 		log.info("tearDown is ending... ");
 	}
-	
 	
 }

@@ -1,5 +1,8 @@
 package com.ert.wearables.test.core.utilities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * This class provides constants from the application
  * 
@@ -71,5 +74,18 @@ public class AppConstants {
 	//////////////// Sites Page Constants /////////////////////////
 	public static final String SITES_PAGE_TITLE = "Sites - MX";
 	public static final String SITES_PAGE_HEADER = "SITES";
+	
+	/////////////// Side Bar Constants /////////////////////
+	public static final ArrayList<String> SIDE_BAR_ITEMS = new ArrayList<>(Arrays.asList(
+			"Studies",
+			"Sites",
+			"Devices",
+			"Subjects",
+			"Trials",
+			"Users",
+			"Groups",
+			"Reports",
+			"Tools",
+			"Options"));
 
 }

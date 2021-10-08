@@ -24,7 +24,7 @@ public class Site extends BaseSetup{
 	private By siteHeader = By.xpath("//h2[normalize-space()='Sites']");
 	
 	// Locators
-	private By sitesMenuIconButton = By.xpath("//span[@class='es-icon-site-qualification-form es-icon']");
+	private By sitesSideBarButton = By.xpath("//span[@class='es-icon-site-qualification-form es-icon']");
 	private By createButton = By.xpath("//button[normalize-space()='Create']");
 	
 	// Site property locators
@@ -44,12 +44,12 @@ public class Site extends BaseSetup{
 	private By submitButton = By.xpath("//button[normalize-space()='Submit']");
 
 	
-	// Study Table's Link Locators
+	// Site Table's Link Locators
 	private By tableIdLink = By.xpath("//table//tbody//tr[1]//td[1]//a");
 	private By tableNameLink = By.xpath("//table//tbody//tr[1]//td[2]//a");
 	private By tableSubjectLink = By.xpath("//table//tbody//tr[1]//td[3]//a");
 	
-	// Study Form's Locators
+	// Site Form's Locators
 	private By siteFormSiteId = By.xpath("/html/body/div/main/div/div/form/section/div[1]/div/a");
 	private By siteFormSiteName = By.cssSelector("section > div:nth-child(2) > div");
 	private By siteFormDeleteButton = By.xpath("//button[normalize-space()='Delete']");
@@ -242,13 +242,13 @@ public class Site extends BaseSetup{
 	}
 	
 	/**
-	 * This method is used to click Sites Icon button
+	 * This method is used to click Sites side bar button
 	 * 
 	 * @author yavuz.ozturk
 	 */
-	public void clickSitesIconButton() {
-		elementUtils.waitForElementPresent(sitesMenuIconButton);
-		elementUtils.doClick(sitesMenuIconButton);
+	public void clickSitesSideBarButton() {
+		elementUtils.waitForElementPresent(sitesSideBarButton);
+		elementUtils.doClick(sitesSideBarButton);
 	}
 	
 	/**
@@ -278,7 +278,7 @@ public class Site extends BaseSetup{
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	public void createSite(String name, String addLineFirst, String addLineSecond, String city, String state, String guid, String country, String phone, String zip, String geolocation, String notes) throws InterruptedException {
+	public void createSite(String name, String addLineFirst, String addLineSecond, String city, String state, String guid, String country, String phone, String zip, String geolocation, String notes) {
 		elementUtils.waitForElementPresent(nameSite);
 		elementUtils.doSendKeys(nameSite, name);
 		elementUtils.waitForElementPresent(clickContactUser);
@@ -364,7 +364,7 @@ public class Site extends BaseSetup{
 	}
 	
 	/**
-	 * This method is used to get site form's site name
+	 * This method is used to get site form's site Id
 	 * 
 	 * @return
 	 * @author yavuz.ozturk
@@ -433,7 +433,7 @@ public class Site extends BaseSetup{
 	}
 	
 	/**
-	 * This method is used to edit site
+	 * C
 	 * 
 	 * @param name
 	 * @param addLineFirst
