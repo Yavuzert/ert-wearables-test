@@ -39,11 +39,11 @@ public class AdminUtils {
 	private By formEditButton = By.xpath("//button[normalize-space()='Edit']");
 	private By enterReason = By.xpath("/html/body/div[2]/div/div[2]/div/form/section/div/input");
 	private By reasonSubmitButton = By.xpath("/html/body/div[2]/div/div[2]/div/form/div/ul/li[2]/button");
-	private By tableIdLink = By.xpath("//table//tbody//tr[1]//td[1]//a");
+	private By tableIdLink = By.xpath("//table//tbody//tr[6]//td[1]//a");
 	private By tableHeaderId = By.xpath("//table//thead//tr[1]//th[1]");
 	private By tableRowsId = By.xpath("//table//tbody//tr//td[1]");
-	
 	private By sideBarButon = By.xpath("(//button)[2]");
+	private By editId = By.xpath("/html/body/div/main/div/div/form/section/div[1]/div/a");
 
 
 	public By getTableHeaderId() {
@@ -65,12 +65,15 @@ public class AdminUtils {
 		javaScriptUtil = new JavaScriptUtil(driver);
 	}
 	
-	
+	/**
+	 * This method is used to click Side Bar button
+	 * 
+	 * @author yavuz.ozturk
+	 */
 	public void clickSideBarButton() {
 		elementUtils.waitForElementPresent(sideBarButon);
 		elementUtils.doClick(sideBarButon);
 	}
-	
 	
 	/**
 	 * This method is used to login Admin Pages
@@ -281,7 +284,6 @@ public class AdminUtils {
 		elementUtils.waitForElementPresent(tableHeader);
 		elementUtils.doClick(tableHeader);
 		ProjectsUtils.pause(1);
-		
 		List<String> sortedStringRows = getRowsStringAsList(tableRow);
 		boolean morePages = areThereMorePages();
 		while (morePages) {
@@ -306,14 +308,12 @@ public class AdminUtils {
 		elementUtils.waitForElementPresent(tableHeader);
 		elementUtils.doClick(tableHeader);
 		ProjectsUtils.pause(1);
-		
 		boolean lessPages = areThereLessPages();
 		while (lessPages) {
 			clickBackButton();
 			ProjectsUtils.pause(3);
 			lessPages = areThereLessPages();
 		}
-
 		List<String> unSortedStringRowsList = getRowsStringAsList(tableRow);
 		boolean morePages = areThereMorePages();
 		while (morePages) {
@@ -381,5 +381,15 @@ public class AdminUtils {
 		}
 	}
 	
+	/**
+	 * This method is used to get edit Id when editing any fields
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
+	public String getEditId() {
+		elementUtils.waitForElementPresent(editId);
+		return elementUtils.doGetText(editId);
+	}
 	
 }

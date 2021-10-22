@@ -56,16 +56,33 @@ public class ProjectsUtils extends BaseSetup {
 	 * @return
 	 * @author yavuz.ozturk
 	 */
-	public String generateAlphaNumericString(int n) {
-		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+	public String randomString(int n) {
+		String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
 		StringBuilder sb = new StringBuilder(n);
 		for (int i = 0; i < n; i++) {
-			int index = (int) (AlphaNumericString.length() * Math.random());
-			sb.append(AlphaNumericString.charAt(index));
+			int index = (int) (alphaNumericString.length() * Math.random());
+			sb.append(alphaNumericString.charAt(index));
 		}
 		return sb.toString();
 	}
 
+	/**
+	 * This method generates numeric string values
+	 * 
+	 * @param n
+	 * @return
+	 * @author yavuz.ozturk
+	 */
+	public String randomInteger(int n) {
+		String randomInteger = "0123456789";
+		StringBuilder sb = new StringBuilder(n);
+		for (int i = 0; i < n; i++) {
+			int index = (int) (randomInteger.length() * Math.random());
+			sb.append(randomInteger.charAt(index));
+		}
+		return sb.toString();
+	}
+	
 	/**
 	 * This method is used to pick date
 	 * 
@@ -74,13 +91,10 @@ public class ProjectsUtils extends BaseSetup {
 	 */
 	public void datepicker(By locator) {
 		List<WebElement> allDates = driver.findElements(locator);
-		
 		// now we will iterate all values and will capture the text. We will select when
 		// date is 28
 		for (WebElement ele : allDates) {
-
 			String date = ele.getText();
-
 			// once date is 28 then click and break
 			if (date.equalsIgnoreCase("1")) {
 				ele.click();
@@ -124,7 +138,6 @@ public class ProjectsUtils extends BaseSetup {
 		List<Map<String, String>> tableDataList = new ArrayList<>();
 		List<WebElement> tableHeaderList = driver.findElements(tableHeaders);
 		List<WebElement> tableRowList = driver.findElements(By.xpath("//table/tbody/tr"));
-
 		for (int i = 0; i < tableRowList.size(); i++) {
 			for (int j = 0; j < tableHeaderList.size(); j++) {
 				LinkedHashMap<String, String> eachRowData = new LinkedHashMap<String, String>();

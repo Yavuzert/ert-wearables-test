@@ -11,6 +11,7 @@ import com.ert.wearables.test.core.utilities.AdminUtils;
 import com.ert.wearables.test.core.utilities.AppConstants;
 import com.ert.wearables.test.core.utilities.ElementUtils;
 import com.ert.wearables.test.core.utilities.JavaScriptUtil;
+import com.ert.wearables.test.core.utilities.ProjectsUtils;
 
 public class Subject extends BaseSetup{
 
@@ -19,6 +20,7 @@ public class Subject extends BaseSetup{
 	WebElement element;
 	JavaScriptUtil javaScriptUtil;
 	AdminUtils adminUtils;
+	ProjectsUtils projectsUtils;
 	
 	// Locators
 	private By subjectsSideBarButton = By.cssSelector("a[href='#subject']");
@@ -314,7 +316,7 @@ public class Subject extends BaseSetup{
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	public void createSubject(String publicID, String firstName, String lastName, String genderParam, String notes) {
+	public void createSubject(String publicId, String firstName, String lastName, String height, String genderParam, String notes) {
 		By genderOption = By.xpath("//option[contains(text(), '" + genderParam + "')]");
 		elementUtils.waitForElementPresent(subjectsStudy);
 		elementUtils.doClick(subjectsStudy);
@@ -327,13 +329,13 @@ public class Subject extends BaseSetup{
 		elementUtils.doSendKeys(subjectsSite, Keys.ARROW_DOWN);
 		elementUtils.doSendKeys(subjectsSite, Keys.ENTER);
 		elementUtils.waitForElementPresent(subjectsPublicID);
-		elementUtils.doSendKeys(subjectsPublicID, publicID);
+		elementUtils.doSendKeys(subjectsPublicID, publicId);
 		elementUtils.waitForElementPresent(subjectsFirstName);
 		elementUtils.doSendKeys(subjectsFirstName, firstName);
 		elementUtils.waitForElementPresent(subjectsLastName);
 		elementUtils.doSendKeys(subjectsLastName, lastName);
 		elementUtils.waitForElementPresent(subjectsHeight);
-		elementUtils.doSendKeys(subjectsHeight, "180");
+		elementUtils.doSendKeys(subjectsHeight, height);
 		elementUtils.waitForElementPresent(subjectsDateOfBirth);
 		elementUtils.doSendKeys(subjectsDateOfBirth, "1999-01-01");
 		driver.findElement(By.xpath("//div[@class='es-date-input']/input")).sendKeys(Keys.ENTER);
@@ -349,8 +351,8 @@ public class Subject extends BaseSetup{
 	 * This method is used to get Last Created Subject First Name from Subject Table
 	 * 
 	 * @return
-	 * @author yavuz.ozturk
 	 * @throws InterruptedException 
+	 * @author yavuz.ozturk
 	 */
 	public String getLastCreatedSubjectNameFromSubjectTable() {
 		String beforeXpath = "//table//tbody//tr[";
@@ -401,7 +403,7 @@ public class Subject extends BaseSetup{
 	 * @return
 	 * @author yavuz.ozturk
 	 */
-	public String getSujectTablePuclicId() {
+	public String getSubjectTablePuclicId() {
 		elementUtils.waitForElementPresent(tablePublicIdLink);
 		String subjectTablePublicId = elementUtils.doGetText(tablePublicIdLink);
 		return subjectTablePublicId;
@@ -413,7 +415,7 @@ public class Subject extends BaseSetup{
 	 * @return
 	 * @author yavuz.ozturk
 	 */
-	public String getSubjectFormPublicID() {
+	public String getSubjectFormPublicId() {
 		elementUtils.waitForElementPresent(subjectFormPublicId);
 		return elementUtils.doGetText(By.cssSelector("section > div:nth-child(5) > div"));
 	}
@@ -433,8 +435,8 @@ public class Subject extends BaseSetup{
 	 * This method is used to get Last Created Public Id from Subject Table
 	 * 
 	 * @return
-	 * @author yavuz.ozturk
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
+	 * @author yavuz.ozturk 
 	 */
 	public String getLastCreatedSubjectPublicIdFromSubjectTable() throws InterruptedException {
 		String beforeXpath = "//table//tbody//tr[";
@@ -447,7 +449,7 @@ public class Subject extends BaseSetup{
 	}
 	
 	/**
-	 * This method is used to get Last Created Site ID from Site Table
+	 * This method is used to get Last Created Subject ID from Subject Table
 	 * 
 	 * @return
 	 * @author yavuz.ozturk
@@ -476,9 +478,22 @@ public class Subject extends BaseSetup{
 	}
 	
 	/**
+	 * This method is used to delete last created Subject from Subject Table Via Public ID Link
+	 * 
+	 * @throws InterruptedException 
+	 * @author yavuz.ozturk
+	 */
+	public void deleteLastCreatedSubjectViaPublicIdLink() throws InterruptedException {
+		elementUtils.doClick(By.linkText(getLastCreatedSubjectPublicIdFromSubjectTable()));
+		elementUtils.doClick(subjectFormDeleteButton);
+		TimeUnit.SECONDS.sleep(3);
+		adminUtils.clickAlertOk();
+	}
+	
+	/**
 	 * This method is used to edit subject
 	 * 
-	 * @param publicID
+	 * @param publicId
 	 * @param firstName
 	 * @param lastName
 	 * @param genderParam
@@ -486,7 +501,7 @@ public class Subject extends BaseSetup{
 	 * @throws InterruptedException
 	 * @author yavuz.ozturk
 	 */
-	public void editSubject(String publicID, String firstName, String lastName, String genderParam, String notes) throws InterruptedException {
+	public void editSubject(String publicId, String firstName, String lastName, String height,String genderParam, String notes) throws InterruptedException {
 		By genderOption = By.xpath("//option[contains(text(), '" + genderParam + "')]");
 		elementUtils.waitForElementPresent(subjectsStudy);
 		elementUtils.doSendKeys(subjectsStudy, Keys.DELETE);
@@ -503,13 +518,13 @@ public class Subject extends BaseSetup{
 		elementUtils.doSendKeys(subjectsSite, Keys.ARROW_DOWN);
 		elementUtils.doSendKeys(subjectsSite, Keys.ENTER);
 		elementUtils.waitForElementPresent(subjectsPublicID);
-		elementUtils.doSendKeys(subjectsPublicID, publicID);
+		elementUtils.doSendKeys(subjectsPublicID, publicId);
 		elementUtils.waitForElementPresent(subjectsFirstName);
 		elementUtils.doSendKeys(subjectsFirstName, firstName);
 		elementUtils.waitForElementPresent(subjectsLastName);
 		elementUtils.doSendKeys(subjectsLastName, lastName);
 		elementUtils.waitForElementPresent(subjectsHeight);
-		elementUtils.doSendKeys(subjectsHeight, "175");
+		elementUtils.doSendKeys(subjectsHeight, height);
 		elementUtils.waitForElementPresent(subjectsDateOfBirth);
 		elementUtils.doSendKeys(subjectsDateOfBirth, "1990-02-02");
 		driver.findElement(By.xpath("//div[@class='es-date-input']/input")).sendKeys(Keys.ENTER);

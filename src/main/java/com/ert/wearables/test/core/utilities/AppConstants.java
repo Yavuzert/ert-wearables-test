@@ -75,6 +75,18 @@ public class AppConstants {
 	public static final String SITES_PAGE_TITLE = "Sites - MX";
 	public static final String SITES_PAGE_HEADER = "SITES";
 	
+	///////////////// Device Data Files Page Constants //////////////////////
+	public static final String DEVICEDATAFILES_PAGE_TITLE = "DeviceDataFiles - MX";
+	public static final String DEVICEDATAFILES_PAGE_HEADER = "DEVICEDATAFILES";
+	
+	///////////////// Device Allocations Page Constants //////////////////////
+	public static final String DEVICEALLOCATIONS_PAGE_TITLE = "DeviceAllocations - MX";
+	public static final String DEVICEALLOCATIONS_PAGE_HEADER = "DEVICEALLOCATIONS";
+	
+	///////////////// Device Log Message Page Constants //////////////////////
+	public static final String DEVICELOGMESSAGE_PAGE_TITLE = "DeviceLogMessages - MX";
+	public static final String DEVICELOGMESSAGE_PAGE_HEADER = "DEVICELOGMESSAGES";
+	
 	/////////////// Side Bar Constants /////////////////////
 	public static final ArrayList<String> SIDE_BAR_ITEMS = new ArrayList<>(Arrays.asList(
 			"Studies",

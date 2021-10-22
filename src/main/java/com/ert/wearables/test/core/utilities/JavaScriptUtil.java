@@ -35,7 +35,7 @@ public class JavaScriptUtil {
 	 * @author yavuz.ozturk
 	 */
 	public void flash(WebElement element) {
-		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		//JavascriptExecutor js = ((JavascriptExecutor) driver);
 		String bgcolor = element.getCssValue("backgroundColor");
 		for (int i = 0; i < 10; i++) {
 			changeColor("rgb(0,200,0)", element);// 1
@@ -53,7 +53,6 @@ public class JavaScriptUtil {
 	private void changeColor(String color, WebElement element) {
 		JavascriptExecutor js = ((JavascriptExecutor) driver);
 		js.executeScript("arguments[0].style.backgroundColor = '" + color + "'", element);
-
 		try {
 			Thread.sleep(20);
 		} catch (InterruptedException e) {
@@ -205,13 +204,11 @@ public class JavaScriptUtil {
 	 */
 	public void checkPageIsReady() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		// Initially bellow given if condition will check ready state of page.
 		if (js.executeScript("return document.readyState").toString().equals("complete")) {
 			System.out.println("Page Is loaded.");
 			return;
 		}
-
 		// This loop will rotate for 25 times to check If page Is ready after
 		// every 1 second.
 		// You can replace your value with 25 If you wants to Increase or

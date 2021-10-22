@@ -24,6 +24,7 @@ public class AuditLog extends BaseSetup{
 	private By auditLogTableObjectId = By.xpath("//tbody/tr[1]/td[4]/div[1]/a[1]");
 	private By auditLogTableStudy = By.xpath("//tbody/tr[1]/td[11]/div[1]");
 	private By auditLogTableSite = By.xpath("//tbody/tr[1]/td[12]/div[1]");
+	private By auditLogTableDate = By.xpath("//tbody/tr[1]/td[8]/div");
 	
 	/**
 	 * Constructor
@@ -38,19 +39,48 @@ public class AuditLog extends BaseSetup{
 		projectsUtils = new ProjectsUtils(driver); 
 	}
 	
+	/**
+	 * This method provides to get audit log table object id
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
 	public String getAuditLogTableObjectId() {
 		elementUtils.waitForElementPresent(auditLogTableObjectId);
 		return elementUtils.doGetText(auditLogTableObjectId);
 	}
 	
+	/**
+	 * This method provides to get audit log table study name
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
 	public String getAuditLogTableStudyName() {
 		elementUtils.waitForElementPresent(auditLogTableStudy);
 		return elementUtils.doGetText(auditLogTableStudy);
 	}
 	
+	/**
+	 * This method provides to get audit log table site name
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
 	public String getAuditLogTableSiteName() {
 		elementUtils.waitForElementPresent(auditLogTableSite);
 		return elementUtils.doGetText(auditLogTableSite);
+	}
+	
+	/**
+	 * This method provides to get audit log table date
+	 * 
+	 * @return
+	 * @author yavuz.ozturk
+	 */
+	public String getAuditLogTableDate() {
+		elementUtils.waitForElementPresent(auditLogTableDate);
+		return elementUtils.doGetText(auditLogTableDate);
 	}
 	
 	/**

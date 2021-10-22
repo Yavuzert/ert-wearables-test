@@ -113,22 +113,20 @@ public class TestSite {
 		log.info("testCreateNewSite test is starting... ");
 		site.clickSitesSideBarButton();
 		adminUtils.clickCreate();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String addressLine1 = "Test_AddressLine1_" + projectsUtils.generateAlphaNumericString(10);
-		String addressLine2 = "Test_AddressLine2_" + projectsUtils.generateAlphaNumericString(10);
-		String city = "Test_City_" + projectsUtils.generateAlphaNumericString(5);
-		String state = "Test_State_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String country = "Test_Country_" + projectsUtils.generateAlphaNumericString(5);
-		String phone = "Test_Phone_" + projectsUtils.generateAlphaNumericString(5);
-		String zip = "Test_Zip_" + projectsUtils.generateAlphaNumericString(5);
-		String geolocation = "Test_Geolocation_" + projectsUtils.generateAlphaNumericString(5);
-		String notes = "Test_Notes_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String addressLine1 = "Test_AddressLine1_" + projectsUtils.randomString(10);
+		String addressLine2 = "Test_AddressLine2_" + projectsUtils.randomString(10);
+		String city = "Test_City_" + projectsUtils.randomString(5);
+		String state = "Test_State_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
+		String country = "Test_Country_" + projectsUtils.randomString(5);
+		String phone = "Test_Phone_" + projectsUtils.randomString(5);
+		String zip = "Test_Zip_" + projectsUtils.randomString(5);
+		String geolocation = "Test_Geolocation_" + projectsUtils.randomString(5);
+		String notes = "Test_Notes_" + projectsUtils.randomString(5);
 		site.createSite(name, addressLine1, addressLine2, city, state, guid, country, phone, zip, geolocation, notes);
 		adminUtils.navigateToLastPage();
 		String lastCreatedObjectName = site.getLastCreatedSiteNameFromSiteTable();
-		
 		assertEquals(name, lastCreatedObjectName, "verifying the presence of last site created");
 		log.info("testCreateNewSite test is ending... ");
 	}
@@ -148,19 +146,18 @@ public class TestSite {
 		log.info("testSiteWebTableData test is starting... ");
 		site.clickSitesSideBarButton();
 		adminUtils.clickCreate();
-		
 		Map<String, String> newUserMap = new LinkedHashMap<>();
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String addressLine1 = "Test_AddressLine1_" + projectsUtils.generateAlphaNumericString(10);
-		String addressLine2 = "Test_AddressLine2_" + projectsUtils.generateAlphaNumericString(10);
-		String city = "Test_City_" + projectsUtils.generateAlphaNumericString(5);
-		String state = "Test_State_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String country = "Test_Country_" + projectsUtils.generateAlphaNumericString(5);
-		String phone = "Test_Phone_" + projectsUtils.generateAlphaNumericString(5);
-		String zip = "Test_Zip_" + projectsUtils.generateAlphaNumericString(5);
-		String geolocation = "Test_Geolocation_" + projectsUtils.generateAlphaNumericString(5);
-		String notes = "Test_Notes_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String addressLine1 = "Test_AddressLine1_" + projectsUtils.randomString(10);
+		String addressLine2 = "Test_AddressLine2_" + projectsUtils.randomString(10);
+		String city = "Test_City_" + projectsUtils.randomString(5);
+		String state = "Test_State_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
+		String country = "Test_Country_" + projectsUtils.randomString(5);
+		String phone = "Test_Phone_" + projectsUtils.randomString(5);
+		String zip = "Test_Zip_" + projectsUtils.randomString(5);
+		String geolocation = "Test_Geolocation_" + projectsUtils.randomString(5);
+		String notes = "Test_Notes_" + projectsUtils.randomString(5);
 		newUserMap.put("Name", name);
 		newUserMap.put("AddressLineFirst", addressLine1);
 		newUserMap.put("AddressLineSecond", addressLine2);
@@ -173,9 +170,7 @@ public class TestSite {
 		newUserMap.put("Geolocation", geolocation);
 		newUserMap.put("Notes", notes);
 		site.createSite(name, addressLine1, addressLine2, city, state, guid, country, phone, zip, geolocation, notes);
-		
 		adminUtils.clickFull();
-
 		List<Map<String, String>> tableDataList = projectsUtils.getTableDataAsMapList();
 		for (int i = 0; i < tableDataList.size(); i++) {
 			Map<String, String> eachMap = tableDataList.get(i);
@@ -190,7 +185,6 @@ public class TestSite {
 			String newZipString = newUserMap.get("Zip");
 			String newGeolocationString = newUserMap.get("Geolocation");
 			String newNotesString = newUserMap.get("Notes");
-			
 			if (eachMap.get("Name") != null) {
 				if ((eachMap.get("Name")).equals(newSiteNameString)) {
 					assertEquals(eachMap.get("Name"), newSiteNameString);
@@ -269,14 +263,11 @@ public class TestSite {
 		String siteTableSiteId = site.getSiteTableSiteId();
 		adminUtils.clickTableIdLink();
 		String siteFormSiteId = site.getSiteFormSiteId();
-		
 		adminUtils.clickHistory();
-		
 		String auditLogTableObjectId = auditLog.getAuditLogTableObjectId();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-		
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(siteTableSiteId,auditLogTableObjectId);
 		assertEquals(siteFormSiteId,auditLogTableObjectId);
@@ -301,15 +292,12 @@ public class TestSite {
 		String siteTableSiteName = site.getSiteTableSiteName();
 		site.clickSiteTableNameLink();
 		String siteFormSiteName = site.getSiteFormSiteName();
-		
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableSiteName = auditLog.getAuditLogTableSiteName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(siteTableSiteName,auditLogTableSiteName);
 		assertEquals(siteFormSiteName,auditLogTableSiteName);
@@ -334,16 +322,13 @@ public class TestSite {
 		String siteTableSiteName = site.getSiteTableSiteName();
 		adminUtils.clickTableIdLink();
 		String siteFormSiteName = site.getSiteFormSiteName();
-		
 		adminUtils.clickEditButton();
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableSiteName = auditLog.getAuditLogTableSiteName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(siteTableSiteName,auditLogTableSiteName);
 		assertEquals(siteFormSiteName,auditLogTableSiteName);
@@ -368,16 +353,13 @@ public class TestSite {
 		String siteTableSiteName = site.getSiteTableSiteName();
 		site.clickSiteTableNameLink();;
 		String siteFormSiteName = site.getSiteFormSiteName();
-		
 		adminUtils.clickEditButton();
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableSiteName = auditLog.getAuditLogTableSiteName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(siteTableSiteName,auditLogTableSiteName);
 		assertEquals(siteFormSiteName,auditLogTableSiteName);
@@ -403,13 +385,10 @@ public class TestSite {
 		adminUtils.navigateToLastPage();
 		String lastCreatedSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site Before Delete " + lastCreatedSite);
-
 		site.deleteLastCreatedSiteViaIdLink();
 		TimeUnit.SECONDS.sleep(3);
-		
 		String lastSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site After Delete " + lastSite);
-		
 		assertNotEquals(lastCreatedSite, lastSite);
 		log.info("testSiteFormDeleteObjectWithIdLink test is ending... ");
 	}
@@ -431,13 +410,10 @@ public class TestSite {
 		adminUtils.navigateToLastPage();
 		String lastCreatedSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site Before Delete " + lastCreatedSite);
-
 		site.deleteLastCreatedSiteViaNameLink();
 		TimeUnit.SECONDS.sleep(3);
-		
 		String lastSite = site.getLastCreatedSiteNameFromSiteTable();
 		log.info("Last Site After Delete " + lastSite);
-		
 		assertNotEquals(lastCreatedSite, lastSite);
 		log.info("testSiteFormDeleteSiteWithNameLink test is ending... ");
 	}
@@ -458,21 +434,19 @@ public class TestSite {
 		site.clickSitesSideBarButton();
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String addressLine1 = "Test_AddressLine1_" + projectsUtils.generateAlphaNumericString(10);
-		String addressLine2 = "Test_AddressLine2_" + projectsUtils.generateAlphaNumericString(10);
-		String city = "Test_City_" + projectsUtils.generateAlphaNumericString(5);
-		String state = "Test_State_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String country = "Test_Country_" + projectsUtils.generateAlphaNumericString(5);
-		String phone = "Test_Phone_" + projectsUtils.generateAlphaNumericString(5);
-		String zip = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String geolocation = "Test_Geolocation_" + projectsUtils.generateAlphaNumericString(5);
-		String notes = "Test_Notes_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String addressLine1 = "Test_AddressLine1_" + projectsUtils.randomString(10);
+		String addressLine2 = "Test_AddressLine2_" + projectsUtils.randomString(10);
+		String city = "Test_City_" + projectsUtils.randomString(5);
+		String state = "Test_State_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
+		String country = "Test_Country_" + projectsUtils.randomString(5);
+		String phone = "Test_Phone_" + projectsUtils.randomString(5);
+		String zip = "Test_GUID_" + projectsUtils.randomString(5);
+		String geolocation = "Test_Geolocation_" + projectsUtils.randomString(5);
+		String notes = "Test_Notes_" + projectsUtils.randomString(5);
 		site.editSite(name, addressLine1, addressLine2, city, state, guid, country, phone, zip, geolocation, notes);
 		String editedSiteName = site.getEditedSiteName();
-		
 		assertEquals(editedSiteName, name);
 		log.info("testSiteEditButtonViaIdLink test is ending... ");
 	}
@@ -493,21 +467,19 @@ public class TestSite {
 		site.clickSitesSideBarButton();
 		site.clickSiteTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String addressLine1 = "Test_AddressLine1_" + projectsUtils.generateAlphaNumericString(10);
-		String addressLine2 = "Test_AddressLine2_" + projectsUtils.generateAlphaNumericString(10);
-		String city = "Test_City_" + projectsUtils.generateAlphaNumericString(5);
-		String state = "Test_State_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String country = "Test_Country_" + projectsUtils.generateAlphaNumericString(5);
-		String phone = "Test_Phone_" + projectsUtils.generateAlphaNumericString(5);
-		String zip = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
-		String geolocation = "Test_Geolocation_" + projectsUtils.generateAlphaNumericString(5);
-		String notes = "Test_Notes_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String addressLine1 = "Test_AddressLine1_" + projectsUtils.randomString(10);
+		String addressLine2 = "Test_AddressLine2_" + projectsUtils.randomString(10);
+		String city = "Test_City_" + projectsUtils.randomString(5);
+		String state = "Test_State_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
+		String country = "Test_Country_" + projectsUtils.randomString(5);
+		String phone = "Test_Phone_" + projectsUtils.randomString(5);
+		String zip = "Test_GUID_" + projectsUtils.randomString(5);
+		String geolocation = "Test_Geolocation_" + projectsUtils.randomString(5);
+		String notes = "Test_Notes_" + projectsUtils.randomString(5);
 		site.editSite(name, addressLine1, addressLine2, city, state, guid, country, phone, zip, geolocation, notes);
 		String editedSiteName = site.getEditedSiteName();
-		
 		assertEquals(editedSiteName, name);
 		log.info("testSiteEditButtonViaNameLink test is ending... ");
 	}
@@ -531,7 +503,6 @@ public class TestSite {
 		log.info("Site Id: " + siteFormSiteId);
 		String curentURL = driver.getCurrentUrl();
 		log.info(curentURL);
-		
 		assertTrue(curentURL.endsWith(siteFormSiteId));
 		assertEquals(siteTableSiteId, siteFormSiteId);
 		log.info("testSiteTableSiteIdLink test is ending... ");
@@ -557,7 +528,6 @@ public class TestSite {
 		log.info("Site Table site Name: " + siteTableSiteName);
 		log.info("Site Form Page Title: " + siteFormPageTitle);
 		log.info("Site Name: " + siteFormSiteName);
-
 		assertTrue(siteTableSiteName.equalsIgnoreCase(siteFormPageTitle));
 		assertTrue(siteTableSiteName.equalsIgnoreCase(siteFormPageTitle));
 		assertTrue(siteFormPageTitle.equalsIgnoreCase(siteFormSiteName));
@@ -585,7 +555,6 @@ public class TestSite {
 		log.info(curentURL);
 		String subjectsHeader = subject.getSubjectsHeader();
 		String subjectsPageTitle = subject.getSubjectsPageTitle();
-
 		assertTrue(curentURL.contains("subject"));
 		assertEquals(siteTableSubjectCount, subjectTableElementCount);
 		assertEquals(subjectsHeader, AppConstants.SUBJECTS_PAGE_HEADER);
@@ -608,7 +577,6 @@ public class TestSite {
 		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(adminUtils.getTableRowsId(), adminUtils.getTableHeaderId());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(adminUtils.getTableRowsId(),adminUtils.getTableHeaderId());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableIdSort test is ending... ");
@@ -629,7 +597,6 @@ public class TestSite {
 		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsName(),site.getTableHeaderName());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsName(),site.getTableHeaderName());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableNameSort test is ending... ");
@@ -650,7 +617,6 @@ public class TestSite {
 		site.clickSitesSideBarButton();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsSubjects(),site.getTableHeaderSubjects());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsSubjects(),site.getTableHeaderSubjects());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableSubjectsSort test is ending... ");
@@ -672,7 +638,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsContactUser(),site.getTableHeaderContactUser());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsContactUser(),site.getTableHeaderContactUser());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableContactUserSort test is ending... ");
@@ -694,7 +659,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsAdressLineOne(),site.getTableHeaderAdressLineOne());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsAdressLineOne(),site.getTableHeaderAdressLineOne());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableAddressLineOneSort test is ending... ");
@@ -716,7 +680,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsAdressLineTwo(),site.getTableHeaderAdressLineTwo());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsAdressLineTwo(),site.getTableHeaderAdressLineTwo());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableAddressLineTwoSort test is ending... ");
@@ -738,7 +701,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCity(),site.getTableHeaderCity());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCity(),site.getTableHeaderCity());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableCitySort test is ending... ");
@@ -760,7 +722,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsState(),site.getTableHeaderState());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsState(),site.getTableHeaderState());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableStateSort test is ending... ");
@@ -782,7 +743,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsGuid(),site.getTableHeaderGuid());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsGuid(),site.getTableHeaderGuid());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableGuidSort test is ending... ");
@@ -804,7 +764,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCountry(),site.getTableHeaderCountry());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCountry(),site.getTableHeaderCountry());
-	
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableCountrySort test is ending... ");
@@ -826,7 +785,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsPhone(),site.getTableHeaderPhone());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsPhone(),site.getTableHeaderPhone());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTablePhoneSort test is ending... ");
@@ -848,7 +806,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsZip(),site.getTableHeaderZip());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsZip(),site.getTableHeaderZip());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableZipSort test is ending... ");
@@ -870,7 +827,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsCreationDate(),site.getTableHeaderCreationDate());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsCreationDate(),site.getTableHeaderCreationDate());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableCreationDateSort test is ending... ");
@@ -892,7 +848,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsGeolocation(),site.getTableHeaderGeolocation());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsGeolocation(),site.getTableHeaderGeolocation());
-	
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableGeolocationSort test is ending... ");
@@ -914,7 +869,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsNotes(),site.getTableHeaderNotes());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsNotes(),site.getTableHeaderNotes());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableNotesSort test is ending... ");
@@ -936,7 +890,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsDeleted(),site.getTableHeaderDeleted());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsDeleted(),site.getTableHeaderDeleted());
-	
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableDeletedSort test is ending... ");
@@ -958,7 +911,6 @@ public class TestSite {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(site.getTableRowsLastModified(),site.getTableHeaderLastModified());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(site.getTableRowsLastModified(),site.getTableHeaderLastModified());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testSiteTableLastModifiedSort test is ending... ");

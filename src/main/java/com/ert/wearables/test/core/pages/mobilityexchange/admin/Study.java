@@ -2,14 +2,11 @@ package com.ert.wearables.test.core.pages.mobilityexchange.admin;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.aventstack.extentreports.model.Log;
 import com.ert.wearables.test.core.base.BaseSetup;
 import com.ert.wearables.test.core.utilities.AdminUtils;
 import com.ert.wearables.test.core.utilities.ElementUtils;
@@ -27,6 +24,9 @@ public class Study extends BaseSetup {
 
 	Logger log = Logger.getLogger(Study.class);
 
+	// Side Bar
+	private By studiesSideBar = By.xpath("//li[@class='es-nav-item']");
+	
 	// Study property locators
 	private By nameUser = By.xpath("//label[contains(text(), \"Name\")]/following-sibling::input");
 	private By description = By.xpath("//label[contains(text(), \"Description\")]/following-sibling::input");
@@ -110,9 +110,6 @@ public class Study extends BaseSetup {
 	private By tableRowsDeleted = By.xpath("//table//tbody//tr//td[20]");
 	private By tableHeaderLastModified = By.xpath("//table//thead//tr[1]//th[21]");
 	private By tableRowsLastModified = By.xpath("//table//tbody//tr//td[21]");
-
-	// Side Bar
-	private By sideBarItems = By.xpath("//li[@class='es-nav-item']");
 
 	public By getTableHeaderName() {
 		return tableHeaderName;
@@ -326,14 +323,10 @@ public class Study extends BaseSetup {
 	public String getLastCreatedObjectIdFromStudyTable() {
 		String beforeXpath = "//table//tbody//tr[";
 		String afterXpath = "]//td[1]";
-
 		By tableRowsXpath = By.xpath("//table//tbody//tr");
-
 		List<WebElement> tableRowList = driver.findElements(tableRowsXpath);
 		int lastRowIndex = tableRowList.size();
-
 		WebElement lastCreatedUser = elementUtils.getElement(By.xpath(beforeXpath + lastRowIndex + afterXpath));
-
 		return lastCreatedUser.getText();
 	}
 
@@ -359,12 +352,9 @@ public class Study extends BaseSetup {
 	public String getLastCreatedObjectNameFromStudyTable() throws InterruptedException {
 		String beforeXpath = "//table//tbody//tr[";
 		String afterXpath = "]//td[2]";
-
 		By tableRowsXpath = By.xpath("//table//tbody//tr");
-
 		List<WebElement> tableRowList = driver.findElements(tableRowsXpath);
 		int lastRowIndex = tableRowList.size();
-
 		WebElement lastCreatedUser = elementUtils.getElement(By.xpath(beforeXpath + lastRowIndex + afterXpath));
 		return lastCreatedUser.getText();
 	}
@@ -448,7 +438,7 @@ public class Study extends BaseSetup {
 	public int getStudyTableSubjectCount() {
 		elementUtils.waitForElementPresent(tableSubjectLink);
 		String subjects = elementUtils.doGetText(tableSubjectLink);
-		int subjectCount = Integer.parseInt(subjects.substring(0, 1));
+		int subjectCount = Integer.parseInt(subjects.substring(0, subjects.indexOf(" ")));
 		elementUtils.doClick(tableSubjectLink);
 		return subjectCount;
 	}
@@ -668,10 +658,9 @@ public class Study extends BaseSetup {
 	 * @author yavuz.ozturk
 	 */
 	public ArrayList<String> getSideBarItems() {
-		elementUtils.waitForElementPresent(sideBarItems);
-		List<WebElement> sideBarElements = driver.findElements(sideBarItems);
+		elementUtils.waitForElementPresent(studiesSideBar);
+		List<WebElement> sideBarElements = driver.findElements(studiesSideBar);
 		ArrayList<String> sideBarElementsText = new ArrayList<>();
-
 		for (WebElement element : sideBarElements) {
 			sideBarElementsText.add(element.getText());
 		}

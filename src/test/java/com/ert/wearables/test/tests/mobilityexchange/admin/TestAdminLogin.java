@@ -93,7 +93,6 @@ public class TestAdminLogin {
 		adminUtils.doLogin(userCred);
 		String title = adminLogin.getPageTitle();
 		log.info("Studies login page title: " + title);
-		
 		assertEquals(title, AppConstants.STUDIES_PAGE_HEADER);
 		log.info("testLoginPage test is ending... ");
 	}
@@ -114,7 +113,6 @@ public class TestAdminLogin {
 		String userEmail = adminLogin.getUserEmail();
 		log.info("Application user email: " + userEmail);
 		assertEquals(userEmail, AppConstants.USER_EMAIL);
-		
 		String username = adminLogin.getUserName();
 		log.info("Application user name: " + username);
 		assertEquals(username, AppConstants.USER_NAME);
@@ -155,7 +153,6 @@ public class TestAdminLogin {
 		log.info("testLoginInvalidCreds test is starting... ");
 		adminLogin.invalidLoginCredentials(username, pwd);
 		String errorMessage = adminLogin.getInvalidCredentialMessage();
-		
 		assertEquals(errorMessage, "Invalid credentials", "Verify Invalid credentials text after entering invalid username and password");
 		log.info("testLoginInvalidCreds test is ending... ");
 	}
@@ -190,7 +187,6 @@ public class TestAdminLogin {
 		log.info("testLoginEmptyUserEmail test is starting... ");
 		adminLogin.emptyEmailLogin(username);
 		String emailErrorMessage = adminLogin.getEmptyUsernameMessage();
-		
 		assertEquals(emailErrorMessage, "An email is required", "Verify empty email text after entering empty email");
 		log.info("testLoginEmptyUserEmail test is ending... ");
 	}
@@ -226,7 +222,6 @@ public class TestAdminLogin {
 		log.info("testLoginEmptyUserPassword test is starting... ");
 		adminLogin.invalidLoginCredentials(username, pwd);
 		String passwordErrorMessage = adminLogin.getEmptyPasswordMessage();
-		
 		assertEquals(passwordErrorMessage, "Password is required", "Verify empty password text after entering invalid email");
 		log.info("testLoginEmptyUserPassword test is ending... ");
 	}
@@ -247,9 +242,7 @@ public class TestAdminLogin {
 		String title = adminLogin.getPageTitle();
 		log.info("Studies page title: " + title);
 		assertEquals(title, AppConstants.STUDIES_PAGE_HEADER);
-		
 		adminLogin.adminLogout();
-	
 		String appTitle = adminLogin.getAdminTitle();
 		log.info("App title: " + appTitle);
 		assertEquals(appTitle, AppConstants.APP_lOGIN_TITLE);

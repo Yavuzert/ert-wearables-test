@@ -18,7 +18,7 @@ import com.ert.wearables.test.core.base.BaseSetup;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.AllocationGroup;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.AuditLog;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.AdminLogin;
-import com.ert.wearables.test.core.pages.mobilityexchange.admin.AllocationConfiguration;
+import com.ert.wearables.test.core.pages.mobilityexchange.admin.ConfigurationElement;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.ProtocolDefinition;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.Session;
 import com.ert.wearables.test.core.pages.mobilityexchange.admin.Study;
@@ -63,7 +63,7 @@ public class TestStudy {
 	Trial trial;
 	TestDefinition testDefinition;
 	StudyProperty studyProperty;
-	AllocationConfiguration allocationConfiguration;
+	ConfigurationElement allocationConfiguration;
 	ProtocolDefinition protocolDefinition;
 	StudyRole studyRole;
 	StudyMembership studyMemberships;
@@ -95,7 +95,7 @@ public class TestStudy {
 		trial = new Trial(driver);
 		testDefinition = new TestDefinition(driver);
 		studyProperty = new StudyProperty(driver);
-		allocationConfiguration = new AllocationConfiguration(driver);
+		allocationConfiguration = new ConfigurationElement(driver);
 		protocolDefinition = new ProtocolDefinition(driver);
 		studyRole = new StudyRole(driver);
 		studyMemberships = new StudyMembership(driver);
@@ -141,14 +141,12 @@ public class TestStudy {
 	public void testCreateNewTestObjectNotSet() throws InterruptedException {
 		log.info("testCreateNewTestObjectNotSet test is starting... ");
 		adminUtils.clickCreate();
-		
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.createObject(name, description, guid, "(not set)");
 		adminUtils.navigateToLastPage();
 		String lastCreatedObjectName = study.getLastCreatedObjectNameFromStudyTable();
-		
 		assertEquals(name, lastCreatedObjectName, "verifying the presence of last study object created");
 		log.info("testCreateNewTestObjectNotSet test is ending... ");
 	}
@@ -167,15 +165,13 @@ public class TestStudy {
 	public void testCreateNewTestObjectWithConfiguring() throws InterruptedException {
 		log.info("testCreateNewTestObjectWithConfiguring test is starting... ");
 		adminUtils.clickCreate();
-		
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.createObject(name, description, guid, "Configuring");
 		adminUtils.clickFull();
 		adminUtils.navigateToLastPage();
 		String lastCreatedObjectName = study.getLastCreatedObjectNameFromStudyTable();
-		
 		assertEquals(name, lastCreatedObjectName, "verifying the presence of last user created");
 		log.info("testCreateNewTestObjectWithConfiguring test is ending... ");
 	}
@@ -194,15 +190,13 @@ public class TestStudy {
 	public void testCreateNewTestObjectWithConfigured() throws InterruptedException {
 		log.info("testCreateNewTestObjectWithConfigured test is starting... ");
 		adminUtils.clickCreate();
-		
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.createObject(name, description, guid, "Configured");
 		adminUtils.clickFull();
 		adminUtils.navigateToLastPage();
 		String lastCreatedObjectName = study.getLastCreatedObjectNameFromStudyTable();
-		
 		assertEquals(name, lastCreatedObjectName, "verifying the presence of last user created");
 		log.info("testCreateNewTestObjectWithConfigured test is ending... ");
 	}
@@ -273,19 +267,16 @@ public class TestStudy {
 	public void testStudyWebTableData() throws InterruptedException {
 		log.info("testStudyWebTableData test is starting... ");
 		adminUtils.clickCreate();
-		
 		Map<String, String> newUserMap = new LinkedHashMap<>();
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		newUserMap.put("Name", name);
 		newUserMap.put("Description", description);
 		newUserMap.put("GUID", guid);
 		study.createObject(name, description, guid, "Configured");
-		
 		adminUtils.clickFull();
 		adminUtils.navigateToLastPage();
-		
 		List<Map<String, String>> tableDataList = projectsUtils.getTableDataAsMapList();
 		for (int i = 0; i < tableDataList.size(); i++) {
 			Map<String, String> eachMap = tableDataList.get(i);
@@ -330,14 +321,11 @@ public class TestStudy {
 		String studyTableObjectId = study.getStudyTableObjectId();
 		adminUtils.clickTableIdLink();
 		String studyFormObjectId = study.getStudyFormObjectId();
-		
 		adminUtils.clickHistory();
-		
 		String auditLogTableObjectId = auditLog.getAuditLogTableObjectId();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-		
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(studyTableObjectId,auditLogTableObjectId);
 		assertEquals(studyFormObjectId,auditLogTableObjectId);
@@ -361,15 +349,12 @@ public class TestStudy {
 		String studyTableObjectName = study.getStudyTableObjectName();
 		study.clickStudyTableNameLink();
 		String studyFormObjectName = study.getStudyFormObjectName();
-		
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableStudyName = auditLog.getAuditLogTableStudyName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(studyTableObjectName,auditLogTableStudyName);
 		assertEquals(studyFormObjectName,auditLogTableStudyName);
@@ -393,16 +378,13 @@ public class TestStudy {
 		String studyTableObjectName = study.getStudyTableObjectName();
 		adminUtils.clickTableIdLink();
 		String studyFormObjectName = study.getStudyFormObjectName();
-		
 		adminUtils.clickEditButton();
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableStudyName = auditLog.getAuditLogTableStudyName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(studyTableObjectName,auditLogTableStudyName);
 		assertEquals(studyFormObjectName,auditLogTableStudyName);
@@ -426,16 +408,13 @@ public class TestStudy {
 		String studyTableObjectName = study.getStudyTableObjectName();
 		study.clickStudyTableNameLink();
 		String studyFormObjectName = study.getStudyFormObjectName();
-		
 		adminUtils.clickEditButton();
 		adminUtils.clickHistory();
 		adminUtils.clickFull();
-		
 		String auditLogTableStudyName = auditLog.getAuditLogTableStudyName();
 		String curentURL = driver.getCurrentUrl();
 		String auditLogHeader = auditLog.getAuditLogHeader();
 		String auditLogPageTitle = auditLog.getAuditLogPageTitle();
-	
 		assertTrue(curentURL.contains("DomainTransformEventInfo"));
 		assertEquals(studyTableObjectName,auditLogTableStudyName);
 		assertEquals(studyFormObjectName,auditLogTableStudyName);
@@ -460,13 +439,10 @@ public class TestStudy {
 		adminUtils.navigateToLastPage();
 		String lastCreatedObject = study.getLastCreatedObjectNameFromStudyTable();
 		log.info("Last Object Before Delete " + lastCreatedObject);
-
 		study.deleteLastCreatedObjectViaIdLink();
 		TimeUnit.SECONDS.sleep(3);
-		
 		String lastObject = study.getLastCreatedObjectNameFromStudyTable();
 		log.info("Last Object After Delete " + lastObject);
-		
 		assertNotEquals(lastCreatedObject, lastObject);
 		log.info("testStudyFormDeleteObjectWithIdLink test is ending... ");
 	}
@@ -487,13 +463,10 @@ public class TestStudy {
 		adminUtils.navigateToLastPage();
 		String lastCreatedObject = study.getLastCreatedObjectNameFromStudyTable();
 		log.info("Last Object Before Delete " + lastCreatedObject);
-
 		study.deleteLastCreatedObjectViaNameLink();
 		TimeUnit.SECONDS.sleep(3);
-		
 		String lastObject = study.getLastCreatedObjectNameFromStudyTable();
 		log.info("Last Object After Delete " + lastObject);
-		
 		assertNotEquals(lastCreatedObject, lastObject);
 		log.info("testStudyFormDeleteObjectWithNameLink test is ending... ");
 	}
@@ -513,13 +486,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithNotSetPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "(not set)");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithNotSetPhaseViaIdLink test is ending... ");
 	}
@@ -539,13 +510,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithConfiguringPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Configuring");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithConfiguringPhaseViaIdLink test is ending... ");
 	}
@@ -565,13 +534,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithConfiguredPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Configured");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithConfiguredPhaseViaIdLink test is ending... ");
 	}
@@ -591,15 +558,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithActivePhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Active");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithActivePhaseViaIdLink test is ending... ");
 	}
@@ -619,15 +584,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithFinishedPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Finished");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithFinishedPhaseViaIdLink test is ending... ");
 	}
@@ -647,15 +610,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithLockedPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Locked");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithLockedPhaseViaIdLink test is ending... ");
 	}
@@ -675,15 +636,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithCancelledPhaseViaIdLink test is starting... ");
 		adminUtils.clickTableIdLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Cancelled");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithCancelledPhaseViaIdLink test is ending... ");
 	}
@@ -703,13 +662,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithNotSetPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "(not set)");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithNotSetPhaseViaNameLink test is ending... ");
 	}
@@ -729,13 +686,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithConfiguringPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Configuring");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithConfiguringPhaseViaNameLink test is ending... ");
 	}
@@ -755,13 +710,11 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithConfiguredPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Configured");
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithConfiguredPhaseViaNameLink test is ending... ");
 	}
@@ -781,15 +734,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithActivePhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Active");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithActivePhaseViaNameLink test is ending... ");
 	}
@@ -809,15 +760,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithFinishedPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Finished");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithFinishedPhaseViaNameLink test is ending... ");
 	}
@@ -837,15 +786,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithLockedPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Locked");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithLockedPhaseViaNameLink test is ending... ");
 	}
@@ -865,15 +812,13 @@ public class TestStudy {
 		log.info("testStudyObjectEditButtonWithCancelledPhaseViaNameLink test is starting... ");
 		study.clickStudyTableNameLink();
 		adminUtils.clickEditButton();
-
-		String name = "Test_name_" + projectsUtils.generateAlphaNumericString(5);
-		String description = "Test_Description_" + projectsUtils.generateAlphaNumericString(5);
-		String guid = "Test_GUID_" + projectsUtils.generateAlphaNumericString(5);
+		String name = "Test_name_" + projectsUtils.randomString(5);
+		String description = "Test_Description_" + projectsUtils.randomString(5);
+		String guid = "Test_GUID_" + projectsUtils.randomString(5);
 		study.editObject(name, description, guid, "Cancelled");
-		String reasonOfChange = "Reason_for_change_" + projectsUtils.generateAlphaNumericString(5);
+		String reasonOfChange = "Reason_for_change_" + projectsUtils.randomString(5);
 		adminUtils.enterAreasonForTheseChanges(reasonOfChange);
 		String editedObjectName = study.getEditedObjectName();
-
 		assertEquals(editedObjectName, name);
 		log.info("testStudyObjectEditButtonWithCancelledPhaseViaNameLink test is ending... ");
 	}
@@ -896,7 +841,6 @@ public class TestStudy {
 		log.info("Study Object Id: " + studyFormObjectId);
 		String curentURL = driver.getCurrentUrl();
 		log.info(curentURL);
-		
 		assertTrue(curentURL.endsWith(studyFormObjectId));
 		assertEquals(studyTableObjectId, studyFormObjectId);
 		log.info("testStudyTableObjectIdLink test is ending... ");
@@ -921,7 +865,6 @@ public class TestStudy {
 		log.info("Study Table Object Name: " + studyTableObjectName);
 		log.info("Study Form Page Title: " + studyFormPageTitle);
 		log.info("Study Object Name: " + studyFormObjectName);
-
 		assertTrue(studyTableObjectName.equalsIgnoreCase(studyFormPageTitle));
 		assertTrue(studyTableObjectName.equalsIgnoreCase(studyFormPageTitle));
 		assertTrue(studyFormPageTitle.equalsIgnoreCase(studyFormObjectName));
@@ -948,7 +891,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String subjectsHeader = subject.getSubjectsHeader();
 		String subjectsPageTitle = subject.getSubjectsPageTitle();
-
 		assertTrue(curentURL.contains("subject"));
 		assertEquals(studyTableSubjectCount, studySubjectCount);
 		assertEquals(subjectsHeader, AppConstants.SUBJECTS_PAGE_HEADER);
@@ -976,7 +918,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String sessionsHeader = session.getSessionsHeader();
 		String sessionsPageTitle = session.getSessionsPageTitle();
-
 		assertTrue(curentURL.contains("session"));
 		assertEquals(studyTableSessionCount, sessionCount);
 		assertEquals(sessionsHeader, AppConstants.SESSIONS_PAGE_HEADER);
@@ -1004,7 +945,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String trialsHeader = trial.getTrialsHeader();
 		String trialsPageTitle = trial.getTrialsPageTitle();
-
 		assertTrue(curentURL.contains("trial"));
 		assertEquals(studyTableTrialCount, trialCount);
 		assertEquals(trialsHeader, AppConstants.TRIALS_PAGE_HEADER);
@@ -1032,7 +972,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String testDefinitonsHeader = testDefinition.getTestDefinitionsHeader();
 		String testDefinitonsPageTitle = testDefinition.getTestDefinitionsPageTitle();
-
 		assertTrue(curentURL.contains("testDefinition"));
 		assertEquals(studyTableTestDefinitionCount, studyTestDefinitionCount);
 		assertEquals(testDefinitonsHeader, AppConstants.TESTDEFINITIONS_PAGE_HEADER);
@@ -1060,7 +999,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String studyPropertiesHeader = studyProperty.getStudyPropertiesHeader();
 		String studyPropertiesPageTitle = studyProperty.getStudyPropertiesPageTitle();
-
 		assertTrue(curentURL.contains("studyProperty"));
 		assertEquals(studyTableStudyPropertiesCount, studyPropertiesCount);
 		assertEquals(studyPropertiesHeader, AppConstants.STUDYPROPERTIES_PAGE_HEADER);
@@ -1088,7 +1026,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String deviceAllocationConfigurationsHeader = allocationConfiguration.getDeviceAllocationConfigurationsHeader();
 		String deviceAllocationConfigurationsPageTitle = allocationConfiguration.getDeviceAllocationConfigurationsPageTitle();
-
 		assertTrue(curentURL.contains("DeviceAllocationConfiguration"));
 		assertEquals(studyTableDeviceAllocationConfigurationsCount, deviceAllocationConfigurationsCount);
 		assertEquals(deviceAllocationConfigurationsHeader, AppConstants.DEVICEALLOCATIONCONFIGURATIONS_PAGE_HEADER);
@@ -1116,7 +1053,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String protocolDefinitionsHeader = protocolDefinition.getProtocolDefinitionsHeader();
 		String protocolDefinitionsPageTitle = protocolDefinition.getProtocolDefinitionsPageTitle();
-
 		assertTrue(curentURL.contains("ProtocolDefinition"));
 		assertEquals(studyTableProtocolDefinitionsCount, protocolDefinitionsCount);
 		assertEquals(protocolDefinitionsHeader, AppConstants.PROTOCOLDEFINITIONS_PAGE_HEADER);
@@ -1144,7 +1080,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String studyRolesHeader = studyRole.getStudyRolesHeader();
 		String studyRolesPageTitle = studyRole.getStudyRolesPageTitle();
-
 		assertTrue(curentURL.contains("studyRole"));
 		assertEquals(studyTableRolesCount, studyRolesCount);
 		assertEquals(studyRolesHeader, AppConstants.STUDYROLES_PAGE_HEADER);
@@ -1172,7 +1107,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String studyMembershipsHeader = studyMemberships.getStudyMembershipsHeader();
 		String studyMembershipsPageTitle = studyMemberships.getStudyMembershipsPageTitle();
-
 		assertTrue(curentURL.contains("studyMembership"));
 		assertEquals(studyTableMembersCount, studyMembershipsCount);
 		assertEquals(studyMembershipsHeader, AppConstants.STUDYMEMBERSHIPS_PAGE_HEADER);
@@ -1200,7 +1134,6 @@ public class TestStudy {
 		log.info(curentURL);
 		String deviceAllocationGroupsHeader = allocationGroup.getDeviceAllocationGroupsHeader();
 		String deviceAllocationGroupsPageTitle = allocationGroup.getDeviceAllocationGroupsPageTitle();
-
 		assertTrue(curentURL.contains("allocationGroup"));
 		assertEquals(studyTableDeviceAllocationGroupsCount, deviceAllocationGroupsCount);
 		assertEquals(deviceAllocationGroupsHeader, AppConstants.DEVICEALLOCATIONGROUPS_PAGE_HEADER);
@@ -1222,7 +1155,6 @@ public class TestStudy {
 		log.info("testStudyTableIdSort test is starting... ");
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(adminUtils.getTableRowsId(), adminUtils.getTableHeaderId());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(adminUtils.getTableRowsId(),adminUtils.getTableHeaderId());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableIdSort test is ending... ");
@@ -1242,7 +1174,6 @@ public class TestStudy {
 		log.info("testStudyTableNameSort test is starting... ");
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsName(),study.getTableHeaderName());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsName(),study.getTableHeaderName());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableNameSort test is ending... ");
@@ -1262,7 +1193,6 @@ public class TestStudy {
 		log.info("testStudyTableSubjectsSort test is starting... ");
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsSubjects(),study.getTableHeaderSubjects());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsSubjects(),study.getTableHeaderSubjects());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableSubjectsSort test is ending... ");
@@ -1282,7 +1212,6 @@ public class TestStudy {
 		log.info("testStudyTableSessionsSort test is starting... ");
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsSessions(),study.getTableHeaderSessions());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsSessions(),study.getTableHeaderSessions());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableSessionsSort test is ending... ");
@@ -1303,7 +1232,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsTestDefinitions(),study.getTableHeaderTestDefinitions());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsTestDefinitions(),study.getTableHeaderTestDefinitions());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableTestDefinitionsSort test is ending... ");
@@ -1324,7 +1252,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsTrials(),study.getTableHeaderTrials());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsTrials(),study.getTableHeaderTrials());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableTrialsSort test is ending... ");
@@ -1345,7 +1272,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsProperties(),study.getTableHeaderProperties());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsProperties(),study.getTableHeaderProperties());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTablePropertiesSort test is ending... ");
@@ -1366,7 +1292,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsDeviceAllocationConfigurations(),study.getTableHeaderDeviceAllocationConfigurations());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsDeviceAllocationConfigurations(),study.getTableHeaderDeviceAllocationConfigurations());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableDeviceAllocationConfigurationsSort test is ending... ");
@@ -1387,7 +1312,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsProtocolDefinitions(),study.getTableHeaderProtocolDefinitions());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsProtocolDefinitions(),study.getTableHeaderProtocolDefinitions());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableProtocolDefinitionsSort test is ending... ");
@@ -1408,7 +1332,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsRoles(),study.getTableHeaderRoles());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsRoles(),study.getTableHeaderRoles());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableRolesSort test is ending... ");
@@ -1429,7 +1352,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsMembers(),study.getTableHeaderMembers());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsMembers(),study.getTableHeaderMembers());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableMembersSort test is ending... ");
@@ -1450,7 +1372,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsDeviceAllocationGroups(),study.getTableHeaderDeviceAllocationGroups());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsDeviceAllocationGroups(),study.getTableHeaderDeviceAllocationGroups());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableDeviceAllocationGroupsSort test is ending... ");
@@ -1471,7 +1392,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsDescription(),study.getTableHeaderDescription());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsDescription(),study.getTableHeaderDescription());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableDescriptionSort test is ending... ");
@@ -1492,7 +1412,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsGUID(),study.getTableHeaderGUID());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsGUID(),study.getTableHeaderGUID());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableGuidSort test is ending... ");
@@ -1513,7 +1432,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsPhase(),study.getTableHeaderPhase());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsPhase(),study.getTableHeaderPhase());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTablePhaseSort test is ending... ");
@@ -1534,7 +1452,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsStartDate(),study.getTableHeaderStartDate());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsStartDate(),study.getTableHeaderStartDate());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableStartDateSort test is ending... ");
@@ -1555,7 +1472,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsUsesSites(),study.getTableHeaderUsesSites());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsUsesSites(),study.getTableHeaderUsesSites());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableUsesSitesSort test is ending... ");
@@ -1576,7 +1492,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsAllowDeviceAllocationConfigurations(),study.getTableHeaderDeviceAllocationConfigurations());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsAllowDeviceAllocationConfigurations(),study.getTableHeaderDeviceAllocationConfigurations());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableAllowDeviceAllocationConfigurationsSort test is ending... ");
@@ -1597,7 +1512,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsCreationDate(),study.getTableHeaderCreationDate());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsCreationDate(),study.getTableHeaderCreationDate());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableCreationDateSort test is ending... ");
@@ -1618,7 +1532,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsDeleted(),study.getTableHeaderDeleted());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsDeleted(),study.getTableHeaderDeleted());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableDeletedSort test is ending... ");
@@ -1639,7 +1552,6 @@ public class TestStudy {
 		adminUtils.clickFull();
 		List<String> sortedList = adminUtils.getPaginatedSortedRowsList(study.getTableRowsLastModified(),study.getTableHeaderLastModified());
 		List<String> unsortedList = adminUtils.getPaginatedUnsortedRowsList(study.getTableRowsLastModified(),study.getTableHeaderLastModified());
-		
 		Assert.assertEquals(sortedList.size(), unsortedList.size());
 		Assert.assertTrue(sortedList.equals(unsortedList));
 		log.info("testStudyTableLastModifiedSort test is ending... ");
@@ -1660,7 +1572,6 @@ public class TestStudy {
 		adminUtils.clickSideBarButton();
 		List<String> sideBarItemsStrings = study.getSideBarItems();
 		int size = sideBarItemsStrings.size();
-		
 		Assert.assertEquals(sideBarItemsStrings, AppConstants.SIDE_BAR_ITEMS);
 		Assert.assertEquals(size, 10);
 		log.info("testSideBarItems test is ending... ");

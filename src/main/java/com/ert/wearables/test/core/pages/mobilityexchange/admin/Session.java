@@ -7,14 +7,11 @@ import org.openqa.selenium.WebElement;
 import com.ert.wearables.test.core.base.BaseSetup;
 import com.ert.wearables.test.core.utilities.AppConstants;
 import com.ert.wearables.test.core.utilities.ElementUtils;
-import com.ert.wearables.test.core.utilities.JavaScriptUtil;
 
 public class Session extends BaseSetup{
 	
 	WebDriver driver;
 	ElementUtils elementUtils;
-	WebElement element;
-	JavaScriptUtil javaScriptUtil;
 
 	// Sessions Page Locators
 	private By sessionsHeader = By.xpath("//h2[normalize-space()='Sessions']");
@@ -27,7 +24,6 @@ public class Session extends BaseSetup{
 	public Session(WebDriver driver) {
 		this.driver = driver;
 		elementUtils = new ElementUtils(driver);
-		javaScriptUtil = new JavaScriptUtil(driver);
 	}
 
 	/**

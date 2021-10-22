@@ -43,7 +43,6 @@ public class Site extends BaseSetup{
 	private By notesSite = By.xpath("/html/body/div/main/div/div/form/section/div[14]/textarea");
 	private By submitButton = By.xpath("//button[normalize-space()='Submit']");
 
-	
 	// Site Table's Link Locators
 	private By tableIdLink = By.xpath("//table//tbody//tr[1]//td[1]//a");
 	private By tableNameLink = By.xpath("//table//tbody//tr[1]//td[2]//a");

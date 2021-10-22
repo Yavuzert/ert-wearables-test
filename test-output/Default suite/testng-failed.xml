@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestSubject">
+      <class name="com.ert.wearables.test.tests.mobilityexchange.admin.TestGroup">
         <methods>
           <include name="setUp"/>
-          <include name="testSubjectTableDeviceAllocationGroupsLink"/>
+          <include name="testCreateNewGroupWithOneMemberUser"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestSubject -->
+      </class> <!-- com.ert.wearables.test.tests.mobilityexchange.admin.TestGroup -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
